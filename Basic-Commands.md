@@ -1,241 +1,369 @@
-                         BASIC COMMANDS (linux)   
-                         
-1) pwd :-  present working directory shows the current directory folder or location we are on .
-      for example suppose we logged from root .. now terminal → pwd .   [output = /root] .
-      /root = home location .
-      
-2) ls :- lists of folders/directories ..
-          suppose we are on home location i.e file explorer → computer → desktop documents pictures videos downloads local(C) .
-          terminal → ls [output =  desktop documents pictures videos downloads local(C)]
-          ls is the main command .
+Here is the enhanced version of your Linux commands with the respective copy code included for each:
 
-3) info :- provides information ..
-              suppose we want to know the information of certain command like ls ..
-              terminal → info ls [output = ls command information i.e meaning , features , etc ]
-              terminal → ls [output = all information regarding commands and some basic commands].
+---
 
-4) man :- manual used for how to use it ..
-               suppose we want to know that how to use (ls) then 
-               terminal → man ls [output = how to use ls]   
+### **BASIC LINUX COMMANDS**
 
-5) ls --help :- -- help shows all (-) commands and their work .
+1. **pwd**  
+   Shows the current directory you are in.
+   ```bash
+   pwd
+   ```
 
-6) ls -l :- this shows all the lists of document and directories in long format like ..
-              -rw-r--r-1  root  root  393(k)  july 30 15:28 desktop 
-              -rw-r--r-2  root  root  104(k)  july 30 15:30 documents
+2. **ls**  
+   Lists all files and directories in the current directory.
+   ```bash
+   ls
+   ```
 
-7) ls -a :- used to hidden files .
-               In linux if we used (.) at the time of creating files then it becomes hidden .
-               like .cache , .java , .profile , etc .
-               
-    we can use both at at time like .. ls -a -l  (or)  ls -al
-    This will show all the hidden files in long format .                                                                       
-                
-8) ls -h :- human readable ..
-                we saw in ls -l that files being shown in k format like 10k 393k etc .
-                terminal → ls -a -l -h   or   ls -alh [output = -rw-r--r-1  root  root  30 mb/3000 kb  july 30 15:28 desktop]
-                
-9) ls -R :- recursive ..
-                recursive means the whole data inside the folder . It will show the whole data inside and inside the particular folder .
-                like /downloads /desktop /movies baaghi vampire diaries /pictures drag.jpg corf.png /documents /music etc .
-                now movies and pictures shows files inside them .
-                
-10) ls -r :- reverse ..
-                it will show the reverse data .. like command = ls -r
-                desktop documents pictures videos downloads local©   to   local© downloads .... desktop  
+3. **info**  
+   Provides detailed information about a command.
+   ```bash
+   info ls
+   ```
 
-11) cd :- change directory ..
-              to enter inside a folder or file example our current directory is /root .
-              command = ls [output = /desktop /downloads /documents etc .{/root}
-              cd downloads = we will go inside downloads
-              if whereever we are , we command = cd then it will back to the main directory we logged in i.e /root . 
-              
-12) cd .. :- change directory return one folder .
-                 command = ls [output = /desktop /downloads /documents etc .{/root}
-                 cd downloads = we will go inside downloads .
-                 cd .. = we will again back to /root .
-                 
-13) mkdir foldername :- make directory foldername.
-                                    command = mkdir foldername
-                                    it will create a folder .
-                                    we can create folder from a different location as well like suppose our pwd is root/downloads
-                                    but we have to create folder anywhere else .then command = mkdir desktop/f1 .
-                                    now f1 folder will be created .
-                                    
-14) clear :- to clear command screen .
+4. **man**  
+   Displays the manual or instructions on how to use a command.
+   ```bash
+   man ls
+   ```
 
-15) / :- 1st folder i.e root , log ,bin ,etc ,usr .
-           command = /var /root /log , etc .
-           we have to go inside var so we have to use /log/var .
-           
-16) touch :- to create a blank file .
-                  command = touch 1.txt , 2.txt (filename) .
-                  
-17) cat :- to see the contain inside file .
-              command = cat 1.txt .(empty file currently)
-             
-18) cat > filename :- to place contain inside a file .
-                              ctrl + c = save .
-                              
-19) rmdir :- to delete a directory
-                 command = rmdir foldername 
-                 it should be empty .
-                 it will not delete the folder which has another file or folder inside .
-                 
-20) rm :- to delete a file or to delete a folder has contain inside .
-              command :- rm filename .
-              command :- rm foldername (it doesnt allow)
-              then command = rm -rf (recursive and forcefully) foldername .
-              it will anyhow delete the folder .
-              
-21) mkdir -p :- to create more folders inside a single folder recursive .
-                      command :- mkdir -p krish/f1/f2/f3 .
-                      
-22) cp :- copy files  
-             cp srcfile  dstfolder
-             cp krish/f1/s1/1.txt    downloads/   files copied to dowloads
-             cp krish/f1/s1/1.txt   krish/f1/s2/2.txt     documents/    1.txt and 2.txt copied to documents
-            
-23) -v :- verbose
-              cp -v  krish/f1/s1/1.txt    downloads/    shows the list of copied file
-              
-24) -f :- forcefully
-            rm -f krish/f1   forcely delete f1 folder
-            
-25) * :- wildcard
-          cp krish/f1/s*   dstfolder   copy all files starting from s
-          cp krish/f2/*.log              copy all files ending with .log
-          
-now suppose we have a folder krish ... meant files and folders inside it , when we copy krish folder to any other folder with cp command then it will occur as an error bcoz
-cp only copies files not folders and krish has folders and files both , now to copy folder as well 
-26) cp -r :- recursive 
-                we want to target the subfolders as well .
-                command = krish/*   .  {all files and folders inside krish to .(dot) ..dot represents pwd / current location}
-                
-warning :- rm -rf foldername is used to delete files recursive and forcefully . 
-                but if we use rm -rf /   or   cd / then rm -rf *   then the whole operating system will get deleted bcoz all things start with / .            
-                
-27) mv :- move or rename files and folders 
-              move is same as cut paste .
-              now suppose we are inside krish/f1/s1
-              command = mv root/downloads/1.txt .(. represents current location) .
-              command = mv root/documents/file.txt krish/f1/s2 .
-              now the file get cut from root/documents/ and now paste on krish/f1/s2
-              
-              now rename the file or folder
-              command = cd krish/f1/s2/
-              command = mv 1.txt 2.txt
-              name changed to 2.txt
-              
-              To change the folder name 
-              command = mv -v krish/ krrish [-v for verbose]
-              
-now if want to go inside any subfolder then we have to write the location like krish/f1/s1 again and again 
-we could create a link direct to s1 folder .
-link are of two types 1)soft 2)hard .
-28) ln -s = link soft .
-            command = ln -s[soft]    krish/f1/s1/1.txt    my_slink[name of link]
-            now if go to 1.txt and cat 1.txt   or   cat my_slink
-            the result will be same .
-            it creates a commpressed file of the shorter length .
-            changes occur in the main will unlink the soft link .
-            
-29) ln = hard link 
-            by default it creates hard link ..
-            hard is the mirror file of actual file lenght lik if the file lenght is 32mb then the hard will be same as 32mb .
-            if any changes occur in the main file . changes occur in hard link as well.
-            
-30) less = command used to see the file content that can be displayed on the defualt screeen.
-               like CUI doesnt have mouse accessibility so the file content could be too long .
-               to view it on the actual screen we use less.
-               command = less filename   or   filename | less .[arrow button is used to go up down left right]
-               
-31) more = same as less command but only use upper arrow key and down arroy key .
+5. **ls --help**  
+   Displays help information for the `ls` command, showing available options and their usage.
+   ```bash
+   ls --help
+   ```
 
-32) date = to know the date .
-      date “+%m” = month
-      date “+%d” = day
-      date “+%y” = year
-      date “+%d-+%m-+%y” = 22-8-2024     
+6. **ls -l**  
+   Lists files and directories in long format, showing detailed information like file permissions, owner, size, and date modified.
+   ```bash
+   ls -l
+   ```
 
-33) id = to know about user uid gid and groups .
+7. **ls -a**  
+   Lists all files, including hidden files (those starting with a dot `.`).
+   ```bash
+   ls -a
+   ```
 
-34) whoami = from which user we are logged in .
+8. **ls -h**  
+   Displays the file size in a human-readable format (e.g., MB, KB).
+   ```bash
+   ls -lh
+   ```
 
-35) who = from which user we are logged in , how many remote connection through this .
+9. **ls -R**  
+   Lists files and directories recursively (i.e., shows the contents of subdirectories).
+   ```bash
+   ls -R
+   ```
 
-36) who -a = detailed information of whoami with last login .
+10. **ls -r**  
+   Displays the directory contents in reverse order.
+   ```bash
+   ls -r
+   ```
 
-37) w = detailed information of whoami with last login with last commands generated .  
+11. **cd**  
+   Changes the current directory to the specified directory.
+   ```bash
+   cd downloads
+   ```
 
-38) tty = terminal type .
-             tty is the original terminator ...
-             while when we use graphic then it provides pts .
-             at the time of ssh connection it provides pts .
-             
-39) hostname = tells about current hostname .
+12. **cd ..**  
+   Moves one level up in the directory tree.
+   ```bash
+   cd ..
+   ```
 
-40) hostname -a = tells about all hostname if was generated .
+13. **mkdir foldername**  
+   Creates a new directory with the specified name.
+   ```bash
+   mkdir new_folder
+   ```
 
-41) hostname -i = local host of the current user .
+14. **clear**  
+   Clears the terminal screen.
+   ```bash
+   clear
+   ```
 
-42) hostname -I = ip address v4 .
+15. **/**  
+   Refers to the root directory, the topmost directory in Linux.
+   ```bash
+   cd /
+   ```
 
-43) ifconfig = details of ip and interfaces(ip subnet netmask wordcast addresses).
-      ifconfig -a = hidden interfaces
-                    
-44) uname = to check we are using linux or not .
+16. **touch filename**  
+   Creates an empty file with the specified name.
+   ```bash
+   touch file.txt
+   ```
 
-45) uname -a = which linux we are using and about kernel .
+17. **cat**  
+   Displays the contents of a file in the terminal.
+   ```bash
+   cat file.txt
+   ```
 
-46) cat /etc/os-release = to check which os version we are working on .
+18. **cat > filename**  
+   Allows you to create a file and add content to it. You can exit the editor by pressing `Ctrl + C`.
+   ```bash
+   cat > file.txt
+   ```
 
-47) lscpu = to check cpu details .
+19. **rmdir foldername**  
+   Deletes an empty directory.
+   ```bash
+   rmdir foldername
+   ```
 
-48) lsusb = to check the devices connected through usb .
+20. **rm**  
+   Deletes a file.
+   ```bash
+   rm file.txt
+   ```
 
-49) lspci = if something is on the pci slot .
-                Developed by Intel Corporation, the Peripheral Component Interconnect standard (PCI) is an industry-standard, high-speed bus found in nearly all desktop
-                 computers. PCI slots allow you to install a wide variety of expansion cards including: Graphics or Video cards.
-                 
-50) lsblk = all disk details and separation .
-               like ssd 512 gb and distribution in different drives .
-               
-51) cal = calender
-             command = cal year (cal 2020) will load the calender of 2020 .               
-               
-51) free -h = device memory and swap details .                                            
+21. **rm -rf**  
+   Forcefully deletes a directory and its contents, including subdirectories and files.
+   ```bash
+   rm -rf foldername
+   ```
 
-52) route -n = gateway .
+22. **mkdir -p**  
+   Creates nested directories in a single command.
+   ```bash
+   mkdir -p folder1/folder2/folder3
+   ```
 
-53) cat etc/resolv.conf = DNS nameserver .
+23. **cp**  
+   Copies files or directories.
+   ```bash
+   cp file.txt /home/user/
+   ```
 
-54) history = shows all commands that we had run .
+24. **cp -v**  
+   Copies files with verbosity, showing each file as it's copied.
+   ```bash
+   cp -v file.txt /home/user/
+   ```
 
-55) uptime = the duration of time our pc is switched on .
+25. **cp -f**  
+   Forces copying, overwriting any existing files without asking for confirmation.
+   ```bash
+   cp -f file.txt /home/user/
+   ```
 
-56) exit and logout = to exit the current connection (root or armour etc) .
+26. **cp -r**  
+   Copies directories recursively.
+   ```bash
+   cp -r folder1/ folder2/
+   ```
 
-57) shutdown = to shut the server 
-                       only root user can use shutdown 
-                       a pop up will get shown to users that the server is going to get shut on the particular duration .
-    
-    shutdown -c = cancel ( if we want to cancel the shutdown within the given time) .
-    shutdown -P = proper shutdown .
-    shutdown -h = halt shutdown ( without any warning it get shut like we are plugging out , no services will be shown at the of screen off ) . risky
-    shutdown -P now = shutdown without any notification it get closed immediately .
-    poweroff = poweroff .
-    init 0 = poweroff .
-    init 6 = restart .
-    shutdown -r = restart .                       
+27. **mv**  
+   Moves or renames files and directories.
+   ```bash
+   mv oldname.txt newname.txt
+   ```
 
+28. **ln -s**  
+   Creates a symbolic (soft) link to a file or directory.
+   ```bash
+   ln -s /path/to/file linkname
+   ```
 
+29. **ln**  
+   Creates a hard link to a file or directory.
+   ```bash
+   ln /path/to/file hardlinkname
+   ```
 
-                                                        thankyou for watching                                
-            
-                                          
-                          
-                                                                                                                         
-                                                                                                                                                                                                                    
-                
-                                     
+30. **less**  
+   Displays file content page by page.
+   ```bash
+   less file.txt
+   ```
+
+31. **more**  
+   Similar to `less`, but with limited scrolling capability.
+   ```bash
+   more file.txt
+   ```
+
+32. **date**  
+   Displays the current date and time.
+   ```bash
+   date
+   ```
+
+33. **id**  
+   Displays the current user's UID (User ID), GID (Group ID), and group memberships.
+   ```bash
+   id
+   ```
+
+34. **whoami**  
+   Shows the username of the currently logged-in user.
+   ```bash
+   whoami
+   ```
+
+35. **who**  
+   Displays who is logged into the system, along with information like login time and terminal.
+   ```bash
+   who
+   ```
+
+36. **who -a**  
+   Displays detailed information about the logged-in users, including the last login time.
+   ```bash
+   who -a
+   ```
+
+37. **w**  
+   Shows detailed information about the users logged into the system, including their current activity and last commands.
+   ```bash
+   w
+   ```
+
+38. **tty**  
+   Displays the terminal device you are using.
+   ```bash
+   tty
+   ```
+
+39. **hostname**  
+   Displays the current system's hostname.
+   ```bash
+   hostname
+   ```
+
+40. **hostname -a**  
+   Displays all the hostnames associated with the system.
+   ```bash
+   hostname -a
+   ```
+
+41. **hostname -i**  
+   Displays the IP address of the current machine.
+   ```bash
+   hostname -i
+   ```
+
+42. **hostname -I**  
+   Displays all available IP addresses associated with the system.
+   ```bash
+   hostname -I
+   ```
+
+43. **ifconfig**  
+   Displays network interface configurations, such as IP address, netmask, and MAC address.
+   ```bash
+   ifconfig
+   ```
+
+44. **uname**  
+   Displays basic information about the system's kernel.
+   ```bash
+   uname
+   ```
+
+45. **uname -a**  
+   Displays detailed system and kernel information.
+   ```bash
+   uname -a
+   ```
+
+46. **cat /etc/os-release**  
+   Displays information about the current operating system.
+   ```bash
+   cat /etc/os-release
+   ```
+
+47. **lscpu**  
+   Displays detailed information about the system's CPU architecture.
+   ```bash
+   lscpu
+   ```
+
+48. **lsusb**  
+   Lists all USB devices connected to the system.
+   ```bash
+   lsusb
+   ```
+
+49. **lspci**  
+   Displays information about the PCI devices connected to the system.
+   ```bash
+   lspci
+   ```
+
+50. **lsblk**  
+   Lists all block devices, such as hard drives, partitions, and storage devices.
+   ```bash
+   lsblk
+   ```
+
+51. **cal**  
+   Displays a calendar for the current month.  
+   You can specify a year as an argument, like `cal 2020` to view the calendar for 2020.
+   ```bash
+   cal
+   ```
+
+52. **free -h**  
+   Displays memory and swap usage in a human-readable format.
+   ```bash
+   free -h
+   ```
+
+53. **route -n**  
+   Displays the system's routing table, including gateways and network interfaces.
+   ```bash
+   route -n
+   ```
+
+54. **cat /etc/resolv.conf**  
+   Displays DNS nameserver information.
+   ```bash
+   cat /etc/resolv.conf
+   ```
+
+55. **history**  
+   Shows a list of previously executed commands in the terminal.
+   ```bash
+   history
+   ```
+
+56. **uptime**  
+   Displays the system's uptime, i.e., how long the system has been running.
+   ```bash
+   uptime
+   ```
+
+57. **exit / logout**  
+   Logs out or exits the current session.
+   ```bash
+   exit
+   ```
+
+58. **shutdown**  
+   Shuts down the system.  
+   You can also use:
+   - `shutdown -c` to cancel a shutdown.
+   - `shutdown -P` for a proper shutdown.
+   - `shutdown -h` for a halt shutdown (abrupt).
+   - `shutdown -P now` for immediate shutdown.
+   - `poweroff` to turn off the system.
+   - `init 0` to shut the system down.
+   - `init 6` to reboot the system.
+   - `shutdown -r` to restart the system.
+
+   ```bash
+   shutdown
+   ```
+
+---
+
+This format includes the command explanation along with its corresponding copy code for easy use.
+kk5
