@@ -1,4 +1,4 @@
-# Linux Directory Structure and Its Components
+# Linux Directory Structure 
 
 The Linux directory structure is organized hierarchically and adheres to the **Filesystem Hierarchy Standard (FHS)**, ensuring a consistent way of locating files and directories across Linux distributions. Below is an overview table of each major directory, its purpose, and examples of its usage.
 
