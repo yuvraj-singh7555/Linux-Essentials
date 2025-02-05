@@ -111,7 +111,7 @@ An **open-source operating system (OS)** refers to an OS whose **source code** i
 
 ---
 
-### **1.Unix**
+### 1. **Unix**
 - **Origin**: Developed in the late 1960s to mid-1970s at AT&T Bell Labs by **Ken Thompson**, **Dennis Ritchie**, and others.
 - **Design**: Created as a **portable**, **multi-tasking**, and **multi-user** operating system.
 - **Source Code**: Initially proprietary. Over time, it saw the release of multiple variants, such as **BSD (Berkeley Software Distribution)**, and commercial versions like **AIX**, **HP-UX**, and **Solaris**.
@@ -122,7 +122,7 @@ An **open-source operating system (OS)** refers to an OS whose **source code** i
   - **Oracle Solaris**
   
 
-### **2.Linux**
+### 2. **Linux**
 - **Origin**: Created by **Linus Torvalds** in **1991**, inspired by Unix but not directly derived from Unix code.
 - **License**: Open-source operating system kernel, licensed under the **GNU General Public License (GPL)**.
 - **GNU/Linux**: Often used in conjunction with **GNU software** to form a complete operating system, commonly referred to as **GNU/Linux**.
