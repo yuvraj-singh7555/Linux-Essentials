@@ -82,7 +82,6 @@ The primary functions of an OS include the following:
 
 ## **Open Source Operating Systems (OS)**
 
-**Definition**:  
 An **open-source operating system (OS)** refers to an OS whose **source code** is freely available for anyone to view, modify, and distribute. Unlike proprietary operating systems, which are closed and controlled by the developer or company, open-source OS are typically developed collaboratively by a community of developers.
 
 ---
