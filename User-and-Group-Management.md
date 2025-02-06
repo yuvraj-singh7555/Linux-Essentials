@@ -64,8 +64,6 @@ A **user account** represents a **user** (e.g., employee) who uses the system re
    developers:x:1002:john,jane
    ```
 
----
-
 ### **Summary**
 
 - **User Accounts**: Every person in Linux has a unique account, which gives them access to the system and tracks their activities.
@@ -73,8 +71,6 @@ A **user account** represents a **user** (e.g., employee) who uses the system re
 - **Regular Users**: These are normal user accounts with limited privileges, and their UID starts from **1000**.
 - **Service Accounts**: These accounts are used for system services and have UIDs between **100** and **999**.
 - **Home Directories**: Every user is given a home directory to store their personal files (e.g., `/home/username`).
-
-In short, Linux provides a structured way to manage **users** and **groups**, ensuring proper security and resource access control in a multi-user environment.
 
 ---
 
@@ -118,7 +114,3 @@ A **group** is a collection of users that enables system administrators to apply
    - **developers** is the group name.
    - **1002** is the **GID**.
    - **alice, bob, john** are members of this group.
-
----
-
-nd access control.
