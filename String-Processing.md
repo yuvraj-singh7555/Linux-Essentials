@@ -1,7 +1,3 @@
-Sure, here's a more organized and simplified version of your note, with the relevant commands formatted properly:
-
----
-
 ### **String Processing in Linux**
 
 **Why is string processing used?**
