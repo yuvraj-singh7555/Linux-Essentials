@@ -1,377 +1,746 @@
-# RPM (REDHAT PACKAGE MANAGE) Commands:
+# RPM Commands
 
-- **Check OS Details**:
+ **RPM** (Red Hat Package Manager) is primarily used for package management in Red Hat-based operating systems like RHEL, CentOS, and Fedora. However, tools like `rpm` can also be used on Debian-based systems if needed. Similarly, `dpkg` (Debian Package) can sometimes be used on Red Hat systems. This cross-usage is typically done to access specific functionalities available in one package manager but not the other.
 
-  You can check your OS details using the following commands:
+## Checking OS Details
 
-  ```
-   cat /etc/os-release
-  ```
-  ```
-   cat /etc/system-release
-  ```
-  ```
-   cat /etc/redhat-release
-  ```
-  ```
-   uname -a
-  ```
+You can check your operating system details using the following commands:
 
-  - The `uname -a` command prints all available system information.
-    - `uname` prints the kernel name.
-    - `-a` option prints all information about the system.
+```
+ cat /etc/os-release
+```
+```
+ cat /etc/system-release
+```
+```
+ cat /etc/redhat-release
+```
+```
+ uname -a
+```
 
-  **Example Output**:
+- `uname -a` prints all available information about the system.
+  - `uname` alone prints the kernel name.
+  - `-a` (all) prints all system information.
 
-  ```
-  Linux localhost.localdomain 5.14.0-522.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Oct 20 13:04:34 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
-  ```
+      #### Sample Output
+      
+      ```
+      Linux localhost.localdomain 5.14.0-522.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Oct 20 13:04:34 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+      ```
+      
+      #### Explanation of Output
+      
+      - **Linux**: Kernel name indicating the system is running Linux.
+      - **localhost.localdomain**: Hostname of the system.
+      - **5.14.0-522.el9.x86_64**: Kernel version, including:
+        - **5.14.0**: Major and minor version numbers.
+        - **522**: Patch level (release number).
+        - **el9**: Indicates Red Hat Enterprise Linux 9 (RHEL 9) distribution.
+        - **x86_64**: Architecture (64-bit x86).
+      - **#1 SMP PREEMPT_DYNAMIC**: Additional kernel build information:
+        - **#1**: Build number.
+        - **SMP**: Symmetric Multi-Processing support.
+        - **PREEMPT_DYNAMIC**: Dynamic preemption model.
+      - **Sun Oct 20 13:04:34 UTC 2024**: Build date and time of the kernel.
+      - **x86_64 x86_64 x86_64**: System architecture (64-bit x86).
+      - **GNU/Linux**: Indicates a GNU/Linux operating system.
 
-  Breakdown:
+## Checking Available Package Managers
 
-  - **Linux**: Kernel name.
-  - **localhost.localdomain**: Hostname of the system.
-  - **5.14.0-522.el9.x86_64**: Kernel version.
-    - **5.14.0**: Kernel version.
-    - **522**: Patch level.
-    - **el9**: Enterprise Linux 9 (RHEL 9).
-    - **x86_64**: 64-bit architecture.
-  - **#1 SMP PREEMPT_DYNAMIC**: Additional kernel build info.
-    - **#1**: Build number.
-    - **SMP**: Symmetric Multi-Processing support.
-    - **PREEMPT_DYNAMIC**: Preemption model.
-  - **Sun Oct 20 13:04:34 UTC 2023**: Build date and time.
-  - **x86_64 x86_64 x86_64**: System architecture information.
-  - **GNU/Linux**: Indicates a GNU/Linux operating system.
+Run the following commands to check which package manager is available on your system:
+
+```
+ rpm
+```
+```
+ dnf
+```
+```
+ yum
+```
+```
+ dpkg
+```
+```
+ apt
+```
+
+- If it's an RPM-based system, commands like `rpm`, `dnf`, and `yum` will provide outputs.
+- In Debian-based systems, `dpkg` and `apt` will be available.
+
+## RPM Database
+
+The RPM database is stored in `/var/lib/rpm`. List its contents using:
+
+```
+# ls /var/lib/rpm
+```
+
+Output:
+
+```
+/var/lib/rpmdb.sqlite
+```
+```
+/var/lib/rpmdb.sqlite-shm
+```
+```
+/var/lib/rpmdb.sqlite-wal
+```
+
+### Explanation of RPM Database Files
+
+1. **rpmdb.sqlite** (Main RPM Database)
+   - Contains all package metadata:
+     - Installed packages
+     - Package versions
+     - Dependencies
+     - File locations
+     - Configuration files
+   - Queried when you run `rpm -qa` (query all packages).
+
+2. **rpmdb.sqlite-shm** (Shared Memory File)
+   - Acts as temporary shared memory for SQLite transactions.
+   - Improves read/write performance by caching queries.
+   - Created dynamically and may not always be present.
+
+3. **rpmdb.sqlite-wal** (Write-Ahead Log)
+   - Temporarily stores uncommitted changes before writing to `rpmdb.sqlite`.
+   - Ensures data consistency in case of a crash.
+   - Cleared when changes are committed.
+
+#### How RPM Uses These Files
+
+- **Installing a Package**: When you run `rpm -i package.rpm`, RPM writes package details to `rpmdb.sqlite`, with temporary changes stored in `rpmdb.sqlite-wal`.
+- **Querying Packages**: When you run `rpm -qa`, RPM reads `rpmdb.sqlite` and may use `rpmdb.sqlite-shm` to speed up queries.
+- **Committing Changes**: When a transaction is committed, `rpmdb.sqlite-wal` is merged into `rpmdb.sqlite`, and `rpmdb.sqlite-wal` is cleared.
+
+## RPM Commands
+
+### Check RPM Version
+
+```
+# rpm --version
+```
+
+Output:
+
+```
+RPM version 4.16.1.3
+```
+
+### Display RPM Help
+
+```
+# rpm --help
+```
 
 ---
 
-- **Identify Package Manager**:
+### Querying Installed Packages
 
-  Run these commands to check which package manager your OS uses:
+#### Check if a Specific Package is Installed
+
+Syntax:
+
+```
+# rpm -q package_name
+```
+
+- `-q`: Query mode.
+
+Examples:
+
+```
+# rpm -q python3
+```
+
+- **If installed**, output:
 
   ```
-   rpm --version
-  ```   
-  ```
-   dnf --version
-  ```
-  ```
-   yum --version
-  ```
-  ```
-   dpkg --version
-  ```
-   apt --version
-  ```
+  python3-3.9.7-2.el9.x86_64
   ```
 
-  - If `rpm`, `yum`, or `dnf` return versions, your system uses RPM.
-  - If `dpkg` or `apt` return versions, your system uses DPKG.
+- **If not installed**, output:
+
+  ```
+  package python3 is not installed
+  ```
+
+    Other examples:
+    
+    ```
+     rpm -q rpm
+    ```
+    ```
+     rpm -q firefox
+    ```
+    ```
+     rpm -q vsftpd
+    ```
+
+#### List All Installed Packages
+
+```
+ rpm -qa package-name
+```
+
+- `-qa`: Query all installed packages.
+- **To count total number of packages**:
+
+  ```
+   rpm -qa | wc -l
+  ```
+
+#### List Packages by Installation Time
+
+```
+ rpm -qa --last
+```
+
+- `--last`: List packages by install time, most recent first.
+- **To see the 10 most recently installed packages**:
+
+  ```
+   rpm -qa --last | head
+  ```
+
+#### Search for a Package by Name
+
+```
+ rpm -qa | grep package_name
+```
+
+  Examples:
+  
+  ```
+   rpm -qa | grep vim
+  ```
+  ```
+   rpm -qa | grep google
+  ```
+  
+#### Get Information About an Installed Package
+
+```
+ rpm -qi package_name
+```
+
+- `-qi`: Query information about a package.
+
+Examples:
+
+```
+ rpm -qi openssh-server
+```
+```
+ rpm -qi rpm
+```
+```
+ rpm -qi passwd
+```
+
+#### List All Files Installed by a Package
+
+```
+ rpm -ql package_name
+```
+
+- `-ql`: Query list of files installed by the package.
+
+Examples:
+
+```
+ rpm -ql openssh-server
+```
+```
+ rpm -ql nano
+```
+
+#### List Configuration Files of a Package
+
+```
+ rpm -qc package_name
+```
+
+- `-qc`: Query configuration files.
+
+Example:
+
+```
+ rpm -qc openssh-server
+```
+
+#### List Documentation Files of a Package
+
+```
+ rpm -qd package_name
+```
+
+- `-qd`: Query documentation files.
+
+Example:
+
+```
+ rpm -qd openssh-server
+```
+
+#### List Dependencies Required by a Package
+
+```
+ rpm -qR package_name
+```
+
+- `-qR`: Query requirements (dependencies).
+
+Examples:
+
+```
+ rpm -qR openssh-server
+```
+```
+ rpm -qR yum
+```
+
+#### List Capabilities Provided by a Package
+
+```
+ rpm -q --provides package_name
+```
+
+- `--provides`: List capabilities provided by the package.
+
+Examples:
+
+```
+ rpm -q --provides openssh-server
+```
+```
+ rpm -q --provides vim-common
+```
+
+#### List Basic File Information of a Package
+
+```
+ rpm -q --dump package_name
+```
+
+- `--dump`: Dump basic file information.
+
+Examples:
+
+```
+ rpm -q --dump nano
+```
+```
+ rpm -q --dump openssh-server
+```
+
+#### Display States of Files in a Package
+
+```
+ rpm -qs package_name
+```
+
+- `-qs`: Query states of files installed by the package.
+
+Examples:
+
+```
+ rpm -qs nano
+```
+```
+ rpm -qs acl
+```
+```
+ rpm -qs openssh-server
+```
+
+#### Find Which Package Owns a File
+
+```
+ rpm -qf /path/to/file
+```
+
+Examples:
+
+```
+ rpm -qf /usr/bin/nano
+```
+```
+ rpm -qf /etc/yum.repos.d/centos.repo
+```
+```
+ rpm -qf /usr/bin/python
+```
 
 ---
 
-- **RPM Database Location**:
+## Downloading a Package
 
-  ```
-   ls /var/lib/rpm
-  ```
+Use `wget` to download a package:
 
-  - Files you might see:
+```
+ wget https://nginx.org/packages/rhel/9/x86_64/RPMS/nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-    ```
-    /var/lib/rpm/rpmdb.sqlite
-    ```
-    ```
-    /var/lib/rpm/rpmdb.sqlite-shm
-    ```
-    ```
-    /var/lib/rpm/rpmdb.sqlite-wal
-    ```
+**Before Downloading:**
 
-  - These are SQLite database files used by RPM to store and manage installed packages.
-  - You can view details of these files using SQLite browsers to see all packages and related information.
-
-  **Files Explanation**:
-
-  1. **rpmdb.sqlite** (Main RPM Database)
-     - Contains all package metadata:
-       - Installed packages
-       - Package versions
-       - Dependencies
-       - File locations
-       - Configuration files
-     - Queried when running `rpm -qa`.
-
-  2. **rpmdb.sqlite-shm** (Shared Memory File)
-     - Temporary shared memory for SQLite transactions.
-     - Improves read/write performance by caching queries.
-     - Created dynamically and may disappear when not in use.
-
-  3. **rpmdb.sqlite-wal** (Write-Ahead Log)
-     - Temporarily stores uncommitted changes before writing to `rpmdb.sqlite`.
-     - Ensures data consistency in case of a crash.
-     - Cleared when changes are committed.
+- Verify the package's release, version, and architecture match your system.
+- Check package dependencies and ensure they are available.
+- Verify that the package does not conflict with existing installed packages.
+- Check the package signature to confirm authenticity.
+- Review changelogs or documentation for important updates or known issues.
 
 ---
 
-- **RPM Commands**
+## Querying Non-Installed Packages
 
-  - **Check RPM Version**:
+### Query Information About a Non-Installed Package
 
-    ```
-     rpm --version
-    ```
+#### Query Package Name
 
-    Output:
+```
+ rpm -qp package_file.rpm
+```
 
-    ```
-    RPM version 4.16.1.3
-    ```
+- `-qp`: Query package.
 
-  - **View RPM Help**:
+Example:
 
-    ```
-     rpm --help
-    ```
+```
+ rpm -qp nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-  - **Query Installed Packages**:
+#### Get Detailed Information
 
-    - **Check if a Package is Installed**:
+```
+ rpm -qip package_file.rpm
+```
 
-      ```
-       rpm -q package_name
-      ```
+- `-qip`: Query information about the package file.
 
-      Example:
+Example:
 
-      ```
-       rpm -q python3
-      ```
+```
+ rpm -qip nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-      - If installed:
+#### List Configuration Files
 
-        ```
-        python3-3.9.7-2.el9.x86_64
-        ```
+```
+ rpm -qcp package_file.rpm
+```
 
-      - If not installed:
+- `-qcp`: Query configuration files from the package file.
 
-        ```
-        package python3 is not installed
-        ```
+Example:
 
-    - **List All Installed Packages**:
+```
+ rpm -qcp nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-      ```
-       rpm -qa
-      ```
+#### List All Files in the Package
 
-      - Count total packages:
+```
+ rpm -qlp package_file.rpm
+```
 
-        ```
-         rpm -qa | wc -l
-        ```
+- `-qlp`: Query list of files in the package file.
 
-      - List packages by install time (most recent first):
+Example:
 
-        ```
-         rpm -qa --last
-        ```
+```
+ rpm -qlp nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-      - View recently installed 10 packages:
+#### List Documentation Files
 
-        ```
-         rpm -qa --last | head
-        ```
+```
+ rpm -qdp package_file.rpm
+```
 
-      - Search for a specific package:
+- `-qdp`: Query documentation files in the package file.
 
-        ```
-         rpm -qa | grep package_name
-        ```
+Example:
 
-    - **Get Package Information**:
+```
+ rpm -qdp nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-      ```
-       rpm -qi package_name
-      ```
+#### List Dependencies Required by the Package
 
-      - Provides detailed information about the package.
+```
+ rpm -qRp package_file.rpm
+```
 
-    - **List Files Installed by a Package**:
+- `-qRp`: Query requirements (dependencies) of the package file.
 
-      ```
-       rpm -ql package_name
-      ```
+Example:
 
-    - **List Configuration Files of a Package**:
+```
+ rpm -qRp nginx-1.26.2-2.el9.ngx.x86_64.rpm
+```
 
-      ```
-       rpm -qc package_name
-      ```
+#### Get License Information (Non-Installed Package)
 
-    - **List Documentation Files of a Package**:
+Since `-qL` is not a standard option for license, use the following:
 
-      ```
-       rpm -qd package_name
-      ```
+```
+ rpm -qip package_file.rpm | grep License
+```
 
-    - **List Dependencies Required by a Package**:
+Example:
 
-      ```
-       rpm -qR package_name
-      ```
-
-    - **List Capabilities Provided by a Package**:
-
-      ```
-       rpm -q --provides package_name
-      ```
-
-    - **Dump Basic File Information of a Package**:
-
-      ```
-       rpm -q --dump package_name
-      ```
-
-    - **Show States of Files Installed by a Package**:
-
-      ```
-       rpm -qs package_name
-      ```
-
-    - **Query Package Owning a File**:
-
-      ```
-       rpm -qf /path/to/file
-      ```
-
-      Example:
-
-      ```
-       rpm -qf /usr/bin/nano
-      ```
+```
+ rpm -qip nginx-1.26.2-2.el9.ngx.x86_64.rpm | grep License
+```
 
 ---
 
-- **Download a Package**:
+## Verifying Packages
 
-  ```
-   wget https://nginx.org/packages/rhel/9/x86_64/RPMS/nginx-1.26.2-2.el9.ngx.x86_64.rpm
-  ```
+### Verify Integrity of Installed Packages
 
-  **Before Downloading**:
+```
+ rpm -V package_name
+```
 
-  - Verify the package's release, version, and architecture match your system.
-  - Check package dependencies and ensure they are available.
-  - Verify that the package does not conflict with existing installed packages.
-  - Check the package signature to confirm authenticity.
-  - Review changelogs or documentation for important updates or known issues.
+- `-V`: Verify mode.
+- Checks size, permissions, checksum, timestamps, etc.
+- **No output** means no changes detected.
+- Outputs a status string if files are modified.
+
+#### Status String Symbols
+
+- **S**: File size differs.
+- **M**: Mode (permissions) changed.
+- **5**: MD5 checksum mismatch.
+- **T**: Timestamp changed.
+- **D**: Device major/minor number mismatch.
+- **U**: User ownership changed.
+- **G**: Group ownership changed.
+- **L**: Symbolic link path mismatch.
+- **P**: Capabilities differ.
+- **c**: Configuration file.
+
+#### Example
+
+```
+ rpm -V openssh-server
+```
+
+Possible Output:
+
+```
+S.5....T.  c /etc/ssh/sshd_config
+missing    c /etc/ssh/sshd_config
+```
+
+- Indicates that `/etc/ssh/sshd_config` has changes in size, MD5 checksum, and timestamp.
+
+### Verbose Verification
+
+```
+ rpm -Vv package_name
+```
+
+- `-Vv`: Verbose verify.
+- Displays detailed information about the state of each file.
+
+Example:
+
+```
+ rpm -Vv passwd
+```
+
+### Verify Package Ignoring Dependencies
+
+```
+ rpm -Vv --nodeps package_name
+```
+
+- `--nodeps`: Ignore dependencies during verification.
+
+Example:
+
+```
+ rpm -Vv --nodeps passwd
+```
 
 ---
 
-- **Query Non-Installed Packages**
+## Package Selection Options
 
-  - **Query Package File**:
+Package selection refers to identifying and selecting a package for querying, verifying, or managing.
 
-    ```
-     rpm -qp package_file.rpm
-    ```
+- **By Package Name**:
 
-    - Displays the name of the package inside the RPM file.
+  ```
+   rpm -q package_name
+  ```
 
-  - **Get Detailed Information About a Package File**:
+- **By File Path**:
 
-    ```
-     rpm -qip package_file.rpm
-    ```
-
-    - Displays detailed information such as name, version, release, architecture, license, group, size, summary, vendor, packager, URL, description, etc.
-
-  - **List Configuration Files in a Package File**:
+  - Find which package owns a file:
 
     ```
-     rpm -qcp package_file.rpm
+     rpm -qf /path/to/file
     ```
 
-  - **List All Files in a Package File**:
+  - Verify a file's integrity and ownership:
 
     ```
-     rpm -qlp package_file.rpm
+     rpm -Vf /path/to/file
     ```
 
-  - **List Documentation Files in a Package File**:
+- **By External Commands**:
+
+  - Locate a command/file before querying:
 
     ```
-     rpm -qdp package_file.rpm
+     which command
     ```
-
-  - **List Dependencies Required by a Package File**:
-
     ```
-     rpm -qRp package_file.rpm
-    ```
-
-  - **Show License Information of a Package File**:
-
-    ```
-     rpm -qLp package_file.rpm
+     whereis command
     ```
 
 ---
 
-- **Verify Packages**
+## Installing Packages
 
-  - **Verify Integrity of Installed Packages**:
+Use the `-i` option to install packages.
 
-    ```
-     rpm -V package_name
-    ```
+```
+ rpm -i package_file.rpm
+```
 
-    - Checks the integrity of installed RPM packages.
-    - Verifies size, permissions, checksum, and timestamps.
-    - No output means no changes detected.
-    - Output format:
+- **If the package is downloaded locally**:
 
-      ```
-      SM5DLUGT c /path/to/file
-      ```
+  ```
+   rpm -i nginx-1.26.3-1.el9.ngx.x86_64.rpm
+  ```
 
-      - Symbols indicate what has changed:
+- **If installing directly from a URL**:
 
-        - **S**: File Size differs
-        - **M**: Mode differs (permissions)
-        - **5**: MD5 checksum differs
-        - **D**: Device major/minor number mismatch
-        - **L**: ReadLink(2) path mismatch
-        - **U**: User ownership differs
-        - **G**: Group ownership differs
-        - **T**: Modification time differs
+  ```
+   rpm -i https://nginx.org/packages/rhel/9/x86_64/RPMS/nginx-1.26.3-1.el9.ngx.x86_64.rpm
+  ```
 
-      - **File Types**:
+### Installing Without Dependencies
 
-        - **c**: Configuration file
+```
+ rpm -i package_file.rpm
+```
 
-    - **Example**:
+- **Note**: If there are no dependencies, the package will install successfully.
 
-      ```
-      S.5....T.  c /etc/ssh/sshd_config
-      ```
+### Installing with Unresolved Dependencies
 
-      - Indicates size, MD5 checksum, and timestamp have changed for `/etc/ssh/sshd_config`, which is a configuration file.
+Example:
 
-  - **Verbose Verification**:
+```
+ rpm -i httpd-2.4.62-4.el9.x86_64.rpm
+```
 
-    ```
-     rpm -Vv package_name
-    ```
+- If dependencies are missing, you will receive errors indicating which dependencies are required.
 
-    - Provides detailed verification, including unchanged files.
+#### Resolving Dependencies
 
-  - **Verify Package Ignoring Dependencies**:
+Install necessary dependencies one by one:
 
-    ```
-     rpm -V --nodeps package_name
-    ```
+```
+ rpm -i dependency1.rpm
+```
+```
+ rpm -i dependency2.rpm
+```
+```
+ rpm -i package_file.rpm
+```
 
+#### Skipping Dependency Checks
+
+```
+ rpm -i --nodeps package_file.rpm
+```
+
+- **Warning**: Skipping dependencies may result in a non-functional package.
+
+#### Verbose and Human-Readable Installation
+
+```
+ rpm -ivh package_file.rpm
+```
+
+- `-i`: Install.
+- `-v`: Verbose output.
+- `-h`: Display hash marks to show progress.
+
+---
+
+## Upgrading Packages
+
+Use the `-U` option to upgrade a package.
+
+```
+ rpm -U package_file.rpm
+```
+
+- Upgrades an existing package or installs it if it's not already installed.
+- Replaces older versions with newer ones.
+- Preserves configuration files to avoid overwriting custom settings.
+
+Example:
+
+```
+ rpm -U nginx-1.26.3-1.el9.ngx.x86_64.rpm
+```
+
+---
+
+## Uninstalling (Erasing) Packages
+
+Use the `-e` option to uninstall a package.
+
+```
+ rpm -e package_name
+```
+
+- Checks for dependencies; will fail if other packages depend on it unless `--nodeps` is used.
+- Removes installed files, except modified configuration files in `/etc/`.
+- Updates the RPM database to reflect the removal.
+
+Example:
+
+```
+ rpm -e httpd-filesystem
+```
+
+### Verbose and Human-Readable Uninstallation
+
+```
+ rpm -evh package_name
+```
+
+- `-e`: Erase (uninstall).
+- `-v`: Verbose output.
+- `-h`: Display hash marks to show progress.
+
+### Forcing Uninstallation Without Dependency Checks
+
+```
+ rpm -e --nodeps package_name
+```
+
+- **Warning**: This may break other packages that depend on the removed package.
+
+---
+
+## Additional Notes
+
+- **Recursive Dependencies**: When installing packages with multiple dependencies, you may need to install several packages to resolve all requirements.
+- **Using `--nodeps`**: Skipping dependency checks is generally discouraged as it can lead to broken packages or system instability.
+- **Configuration Files**: Uninstallation typically doesn't remove configuration files in `/etc/` to preserve user settings. These may need to be removed manually if desired.
+- **Regular Verification**: It's good practice to verify package integrity periodically to detect unauthorized changes or corruption.
