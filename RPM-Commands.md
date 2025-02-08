@@ -4,11 +4,17 @@
 
   You can check your OS details using the following commands:
 
-  ```bash
-  # cat /etc/os-release
-  # cat /etc/system-release
-  # cat /etc/redhat-release
-  # uname -a
+  ```
+   cat /etc/os-release
+  ```
+  ```
+   cat /etc/system-release
+  ```
+  ```
+   cat /etc/redhat-release
+  ```
+  ```
+   uname -a
   ```
 
   - The `uname -a` command prints all available system information.
@@ -44,12 +50,20 @@
 
   Run these commands to check which package manager your OS uses:
 
-  ```bash
-  # rpm --version
-  # dnf --version
-  # yum --version
-  # dpkg --version
-  # apt --version
+  ```
+   rpm --version
+  ```   
+  ```
+   dnf --version
+  ```
+  ```
+   yum --version
+  ```
+  ```
+   dpkg --version
+  ```
+   apt --version
+  ```
   ```
 
   - If `rpm`, `yum`, or `dnf` return versions, your system uses RPM.
@@ -59,15 +73,19 @@
 
 - **RPM Database Location**:
 
-  ```bash
-  # ls /var/lib/rpm
+  ```
+   ls /var/lib/rpm
   ```
 
   - Files you might see:
 
     ```
     /var/lib/rpm/rpmdb.sqlite
+    ```
+    ```
     /var/lib/rpm/rpmdb.sqlite-shm
+    ```
+    ```
     /var/lib/rpm/rpmdb.sqlite-wal
     ```
 
@@ -101,8 +119,8 @@
 
   - **Check RPM Version**:
 
-    ```bash
-    # rpm --version
+    ```
+     rpm --version
     ```
 
     Output:
@@ -113,22 +131,22 @@
 
   - **View RPM Help**:
 
-    ```bash
-    # rpm --help
+    ```
+     rpm --help
     ```
 
   - **Query Installed Packages**:
 
     - **Check if a Package is Installed**:
 
-      ```bash
-      # rpm -q package_name
+      ```
+       rpm -q package_name
       ```
 
       Example:
 
-      ```bash
-      # rpm -q python3
+      ```
+       rpm -q python3
       ```
 
       - If installed:
@@ -145,102 +163,102 @@
 
     - **List All Installed Packages**:
 
-      ```bash
-      # rpm -qa
+      ```
+       rpm -qa
       ```
 
       - Count total packages:
 
-        ```bash
-        # rpm -qa | wc -l
+        ```
+         rpm -qa | wc -l
         ```
 
       - List packages by install time (most recent first):
 
-        ```bash
-        # rpm -qa --last
+        ```
+         rpm -qa --last
         ```
 
       - View recently installed 10 packages:
 
-        ```bash
-        # rpm -qa --last | head
+        ```
+         rpm -qa --last | head
         ```
 
       - Search for a specific package:
 
-        ```bash
-        # rpm -qa | grep package_name
+        ```
+         rpm -qa | grep package_name
         ```
 
     - **Get Package Information**:
 
-      ```bash
-      # rpm -qi package_name
+      ```
+       rpm -qi package_name
       ```
 
       - Provides detailed information about the package.
 
     - **List Files Installed by a Package**:
 
-      ```bash
-      # rpm -ql package_name
+      ```
+       rpm -ql package_name
       ```
 
     - **List Configuration Files of a Package**:
 
-      ```bash
-      # rpm -qc package_name
+      ```
+       rpm -qc package_name
       ```
 
     - **List Documentation Files of a Package**:
 
-      ```bash
-      # rpm -qd package_name
+      ```
+       rpm -qd package_name
       ```
 
     - **List Dependencies Required by a Package**:
 
-      ```bash
-      # rpm -qR package_name
+      ```
+       rpm -qR package_name
       ```
 
     - **List Capabilities Provided by a Package**:
 
-      ```bash
-      # rpm -q --provides package_name
+      ```
+       rpm -q --provides package_name
       ```
 
     - **Dump Basic File Information of a Package**:
 
-      ```bash
-      # rpm -q --dump package_name
+      ```
+       rpm -q --dump package_name
       ```
 
     - **Show States of Files Installed by a Package**:
 
-      ```bash
-      # rpm -qs package_name
+      ```
+       rpm -qs package_name
       ```
 
     - **Query Package Owning a File**:
 
-      ```bash
-      # rpm -qf /path/to/file
+      ```
+       rpm -qf /path/to/file
       ```
 
       Example:
 
-      ```bash
-      # rpm -qf /usr/bin/nano
+      ```
+       rpm -qf /usr/bin/nano
       ```
 
 ---
 
 - **Download a Package**:
 
-  ```bash
-  # wget https://nginx.org/packages/rhel/9/x86_64/RPMS/nginx-1.26.2-2.el9.ngx.x86_64.rpm
+  ```
+   wget https://nginx.org/packages/rhel/9/x86_64/RPMS/nginx-1.26.2-2.el9.ngx.x86_64.rpm
   ```
 
   **Before Downloading**:
@@ -257,48 +275,48 @@
 
   - **Query Package File**:
 
-    ```bash
-    # rpm -qp package_file.rpm
+    ```
+     rpm -qp package_file.rpm
     ```
 
     - Displays the name of the package inside the RPM file.
 
   - **Get Detailed Information About a Package File**:
 
-    ```bash
-    # rpm -qip package_file.rpm
+    ```
+     rpm -qip package_file.rpm
     ```
 
     - Displays detailed information such as name, version, release, architecture, license, group, size, summary, vendor, packager, URL, description, etc.
 
   - **List Configuration Files in a Package File**:
 
-    ```bash
-    # rpm -qcp package_file.rpm
+    ```
+     rpm -qcp package_file.rpm
     ```
 
   - **List All Files in a Package File**:
 
-    ```bash
-    # rpm -qlp package_file.rpm
+    ```
+     rpm -qlp package_file.rpm
     ```
 
   - **List Documentation Files in a Package File**:
 
-    ```bash
-    # rpm -qdp package_file.rpm
+    ```
+     rpm -qdp package_file.rpm
     ```
 
   - **List Dependencies Required by a Package File**:
 
-    ```bash
-    # rpm -qRp package_file.rpm
+    ```
+     rpm -qRp package_file.rpm
     ```
 
   - **Show License Information of a Package File**:
 
-    ```bash
-    # rpm -qLp package_file.rpm
+    ```
+     rpm -qLp package_file.rpm
     ```
 
 ---
@@ -307,8 +325,8 @@
 
   - **Verify Integrity of Installed Packages**:
 
-    ```bash
-    # rpm -V package_name
+    ```
+     rpm -V package_name
     ```
 
     - Checks the integrity of installed RPM packages.
@@ -345,16 +363,15 @@
 
   - **Verbose Verification**:
 
-    ```bash
-    # rpm -Vv package_name
+    ```
+     rpm -Vv package_name
     ```
 
     - Provides detailed verification, including unchanged files.
 
   - **Verify Package Ignoring Dependencies**:
 
-    ```bash
-    # rpm -V --nodeps package_name
+    ```
+     rpm -V --nodeps package_name
     ```
 
----
