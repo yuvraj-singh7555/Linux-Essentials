@@ -3,10 +3,30 @@
 Package Managers are used to handle software installation, removal, and updates.
 
 ## Common Package Managers
-- RPM
-  - YUM, DNF
-- DPKG
-  - APT
+- **RPM**
+
+  - **RPM (Red Hat Package Manager)** is a package management system used by Red Hat-based Linux distributions (like RHEL and CentOS) for installing, updating, and removing software packaged in `.rpm` files.
+  
+  - **RPM has advanced package management tools**:
+  
+    - **YUM (Yellowdog Updater, Modified)**
+      - Automates the process of resolving dependencies and managing packages from repositories.
+      - Simplifies package management tasks on RPM-based systems.
+    
+    - **DNF (Dandified YUM)**
+      - The modern replacement for YUM with improved performance and better dependency handling.
+      - Offers a more stable and efficient package management experience on RPM-based distributions.
+
+
+- **DPKG**
+
+  - **DPKG (Debian Package)** is a low-level package management tool for Debian-based systems, used to install, remove, and manage software packages contained in `.deb` files.
+  
+  - **DPKG has an advanced package management tool**:
+  
+    - **APT (Advanced Package Tool)**
+      - Automates retrieval, configuration, and installation of software packages from repositories.
+      - Handles dependency resolution and simplifies package management tasks on Debian-based systems.
 
 ### 1. Red Hat Package Manager (RPM)
 - RPM is the default package manager for Red Hat-based distributions, such as RHEL (Red Hat Enterprise Linux), CentOS, Fedora, and others.
@@ -22,24 +42,24 @@ Package Managers are used to handle software installation, removal, and updates.
     - **SRPM (Source RPM)**: Contains the source code for the application. These are typically used for compiling the application from source on your system.
 #### Common Commands
 - Install a package:
-  ```sh
-  sudo rpm -i package.rpm
+  ```
+   rpm -i package.rpm
   ```
 - Remove a package:
-  ```sh
-  sudo rpm -e package-name
+  ```
+   rpm -e package-name
   ```
 - Query package:
-  ```sh
-  sudo rpm -q package-name
+  ```
+   rpm -q package-name
   ```
 - Verify installed package:
-  ```sh
-  sudo rpm -V package-name
+  ```
+   rpm -V package-name
   ```
 - List all installed packages:
-  ```sh
-  sudo rpm -qa
+  ```
+   rpm -qa
   ```
 
 #### Architecture Types for Packages
@@ -70,20 +90,20 @@ Package Managers are used to handle software installation, removal, and updates.
 Front-end tools for RPM, resolving dependencies.
 
 - Install a package:
-  ```sh
-  sudo yum install package-name
+  ``` 
+   yum install package-name
   ```
   or
-  ```sh
-  sudo dnf install package-name
+  ``` 
+   dnf install package-name
   ```
 - Update all packages:
-  ```sh
-  sudo yum update
+  ``` 
+   yum update
   ```
   or
-  ```sh
-  sudo dnf update
+  ``` 
+   dnf update
   ```
 
 ---
@@ -95,24 +115,24 @@ Front-end tools for RPM, resolving dependencies.
 
 #### Common Commands
 - Install a package:
-  ```sh
-  sudo dpkg -i package.deb
+  ``` 
+   dpkg -i package.deb
   ```
 - Remove a package:
-  ```sh
-  sudo dpkg -r package-name
+  ``` 
+   dpkg -r package-name
   ```
 - List installed packages:
-  ```sh
-  sudo dpkg -l
+  ``` 
+   dpkg -l
   ```
 - Query package:
-  ```sh
-  sudo dpkg -s package-name
+  ``` 
+   dpkg -s package-name
   ```
 - Fix broken dependencies:
-  ```sh
-  sudo apt-get install -f
+  ``` 
+   apt-get install -f
   ```
 
 #### Some Debian-based OS
@@ -122,16 +142,16 @@ Examples: Blackbox, Arch, Parrot, Kali, Debian, Ubuntu.
 Higher-level tool for managing Debian packages.
 
 - Install a package:
-  ```sh
-  sudo apt install package-name
+  ``` 
+   apt install package-name
   ```
 - Update package list:
-  ```sh
-  sudo apt update
+  ``` 
+   apt update
   ```
 - Upgrade installed packages:
-  ```sh
-  sudo apt upgrade
+  ``` 
+   apt upgrade
   ```
 
 ---
