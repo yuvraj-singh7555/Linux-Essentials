@@ -272,49 +272,49 @@ Command Line operations
 ---
 
 ```bash
- # sed ‘1.2p’ /etc/passwd
+sed ‘1.2p’ /etc/passwd
 ```
 
 This will print line 1 and 2, two times and the rest of the file as same as it is
 
 ```bash
- # sed -n ‘1.2p’ /etc/passwd
+sed -n ‘1.2p’ /etc/passwd
 ```
 
 This command will only print line 1 and 2, the rest of the file will not be printed
 
 ```bash
- # sed -n ‘/^$/p’ /etc/passwd
+sed -n ‘/^$/p’ /etc/passwd
 ```
 
 Print only empty lines
 
 ```bash
- # sed -n ‘/^$/!p’ /etc/passwd
+sed -n ‘/^$/!p’ /etc/passwd
 ```
 
 Do not print empty lines
 
 ```bash
- # sed -n '1,$p' /etc/passwd
+sed -n '1,$p' /etc/passwd
 ```
 
 Print all lines 
 
 ```bash
- # sed -n '$p' /etc/passwd
+sed -n '$p' /etc/passwd
 ```
 
 This will only print last line
 
 ```bash
- # sed -n '5,8!p' /etc/passwd
+sed -n '5,8!p' /etc/passwd
 ```
 
 Do not print lines 5 to 8
 
 ```bash
- # sed '5,$d' /etc/passwd
+sed '5,$d' /etc/passwd
 ```
 
 Do not print lines 5 to last / print lines 1 to 4
@@ -324,13 +324,13 @@ Do not print lines 5 to last / print lines 1 to 4
 ### Pattern Matching / Pattern Searching
 
 ```bash
- # sed -n '/root/p' /etc/passwd
+sed -n '/root/p' /etc/passwd
 ```
 
 Matching `root` in given file
 
 ```bash
- # sed -n '/root/,+3p' /etc/passwd
+sed -n '/root/,+3p' /etc/passwd
 ```
 
 Print lines where `root` is matched and print next 3 lines where `root` is matched 
@@ -340,50 +340,50 @@ Print lines where `root` is matched and print next 3 lines where `root` is match
 ### Find and replace
 
 ```bash
- # sed -n 's/sbin/SBIN' /etc/passwd
+sed -n 's/sbin/SBIN' /etc/passwd
 ```
 
 Searching `sbin` and replacing it with `SBIN`  ( This will only replace first match in a single lines )
 
 ```bash
- # sed -n 's/root/ROOT/gp' /etc/passwd
+sed -n 's/root/ROOT/gp' /etc/passwd
 ```
 
 `g` Means global, every single match of the file will be replaced with the word we are replacing 
 
 ```bash
- # sed -n 's/root/ROOT/1p' /etc/passwd
+sed -n 's/root/ROOT/1p' /etc/passwd
 ```
 
 Match `root` in line in given file and replace only first `root` with`ROOT` 
 
 ```bash
- # sed -n 's/root/ROOT/2p' /etc/passwd
+sed -n 's/root/ROOT/2p' /etc/passwd
 ```
 
 Match `root` in line in given file and replace only second `root` with`ROOT` 
 
 ```bash
- # echo “Welcome To Presidential Suite” | sed ‘s/\(\b[A-Z]\)/\(\1\)/g’
+echo “Welcome To Presidential Suite” | sed ‘s/\(\b[A-Z]\)/\(\1\)/g’
 ```
 
 Output will be :
 `(W)elcome (T)o (P)residential (S)uite`
 
 ```bash
- # sed ‘4 s/sbin/SBIN/’ file_name.txt
+sed ‘4 s/sbin/SBIN/’ file_name.txt
 ```
 
 This will replace `sbin` to `SBIN` in line number `4`
 
 ```bash
- # sed G file_name.txt
+sed G file_name.txt
 ```
 
 Adds an empty line after every line in the file.
 
 ```bash
- # sed 'G;G;G' file_name.txt
+sed 'G;G;G' file_name.txt
 ```
 
 This will add 3 empty lines after every line in the file.
@@ -393,31 +393,31 @@ This will add 3 empty lines after every line in the file.
 ### Append
 
 ```bash
- # sed ‘/arnold/a ARNOLD User’ file_name.txt
+sed ‘/arnold/a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after `arnold` in the given file
 
 ```bash
- # sed ‘2a ARNOLD User’ file_name.txt
+sed ‘2a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after the second line of the given file
 
 ```bash
- # sed ‘5a ARNOLD User’ file_name.txt
+sed ‘5a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after the fifth line of the given file
 
 ```bash
- # sed ‘5!a ARNOLD User’ file_name.txt
+sed ‘5!a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after every line except fifth line of the given file
 
 ```bash
- # sed ‘1,5a ARNOLD User’ file_name.txt
+sed ‘1,5a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after every line between 1 to 5th line of the given file 
@@ -427,25 +427,25 @@ This will add `ARNOLD User` after every line between 1 to 5th line of the given 
 ### prepend
 
 ```bash
- # sed ‘1i ARNOLD User’ file_name.txt
+sed ‘1i ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` before the first line of the given file
 
 ```bash
- # sed ‘5!i ARNOLD User’ file_name.txt
+sed ‘5!i ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` before every line except fifth line of the given file
 
 ```bash
- # sed ‘1i——————————————————————’ filename.txt
+sed ‘1i--------------------’ filename.txt
 ```
 
 This will make a line after line 1
 
 ```bash
- # sed ‘1,$i——————————————————————’ filename.txt
+sed ‘1,$i--------------------’ filename.txt
 ```
 
 This will make a line after every line
@@ -453,13 +453,13 @@ This will make a line after every line
 ---
 
 ```bash
- # sed ‘/arnold/d’ file_name.txt
+sed ‘/arnold/d’ file_name.txt
 ```
 
 `d` is for `delete` This will not print `arnold` in the file output
 
 ```bash
- # sed ‘/\tarnold/d’ file_name .txt
+sed ‘/\tarnold/d’ file_name .txt
 ```
 
 Do not print `arnold` before which `tab` key is used
@@ -467,49 +467,49 @@ Do not print `arnold` before which `tab` key is used
 ### Using character classes
 
 ```bash
- # sed ‘/[[:space:]]arnold/d’ filename.txt
+sed ‘/[[:space:]]arnold/d’ filename.txt
 ```
 
 This will `NOT` print lines where `arnold` appears after a `ENTER` (at the start of a new line) `SPACE` and `TAB` key.
 
 ```bash
- # sed ‘[0-9]/d’ filename.txt
+sed ‘[0-9]/d’ filename.txt
 ```
 
 Do `NOT` print output line which has given range of numbers in it.
 
 ```bash
- # sed ‘/[[:digit:]]/p’ filename.txt
+sed ‘/[[:digit:]]/p’ filename.txt
 ```
 
 This will only print output which has digits
 
 ```bash
- # sed ‘/[[:digit:]]/d’ filename.txt
+sed ‘/[[:digit:]]/d’ filename.txt
 ```
 
 This will NOT print output which has digits
 
 ```bash
- # sed ‘/[a-zA-Z]/d’ filename.txt
+sed ‘/[a-zA-Z]/d’ filename.txt
 ```
 
 Delete all lines containing alphabets A to Z capital to small 
 
 ```bash
- # sed ‘/[A-Z]/d’ filename.txt
+sed ‘/[A-Z]/d’ filename.txt
 ```
 
 Delete all lines containing alphabets A to Z capital or Uppercase
 
 ```bash
- # sed ‘/\//d’ filename.txt
+sed ‘/\//d’ filename.txt
 ```
 
 Delete all lines containing `Slash (/)`  
 
 ```bash
- # sed ‘/\thr/d’ filename.txt
+sed ‘/\thr/d’ filename.txt
 ```
 
 Delete all lines containing`hr` after `TAB` key
@@ -519,19 +519,19 @@ Delete all lines containing`hr` after `TAB` key
 ### Change or replace
 
 ```bash
- # sed ‘/arnold/c ARNOLD User’ filename.txt
+sed ‘/arnold/c ARNOLD User’ filename.txt
 ```
 
 This will change or replace `arnold` to `ARNOLD User`
 
 ```bash
- # sed '1c ARNOLD' filename.txt
+sed '1c ARNOLD' filename.txt
 ```
 
 This will change or replace `arnold` to `ARNOLD` Only in line 1  
 
 ```bash
- # sed '1,5c ARNOLD' filename.txt
+sed '1,5c ARNOLD' filename.txt
 ```
 
 This will change or replace `arnold` to `ARNOLD` Only in line range 1 to 5 
@@ -541,7 +541,7 @@ This will change or replace `arnold` to `ARNOLD` Only in line range 1 to 5
 ### Quit or exit file
 
 ```bash
- # sed ‘/arnold/q’ filename.txt
+sed ‘/arnold/q’ filename.txt
 ```
 
 This will `Quit` the file when `arnold` is found / printed
@@ -553,8 +553,8 @@ This will `Quit` the file when `arnold` is found / printed
 The status code of a successfully ran command is `0` , To make any status code of a successful command rather than `0` Use command below
 
 ```bash
- # sed ‘/arnold/q2’ filename.txt
- # echo $?
+sed ‘/arnold/q2’ filename.txt
+echo $?
 ```
 
 The output of status code of command will be `2`
@@ -564,25 +564,25 @@ The output of status code of command will be `2`
 ### Perform the shell command
 
 ```bash
- # sed ‘1e date’ /etc/passwd
+sed ‘1e date’ /etc/passwd
 ```
 
 This will generate output of `date` command at first line of `/etc/passwd` file output
 
 ```bash
- # sed ‘$e date’ /etc/passwd
+sed ‘$e date’ /etc/passwd
 ```
 
 This will generate output of `date` command at last line of `/etc/passwd` file output
 
 ```bash
- # sed ‘1e echo -n "Date: "; date’ filename.txt
+sed ‘1e echo -n "Date: "; date’ filename.txt
 ```
 
 This will `echo` `date` then output of `date` command at first line of `filename.txt` file output
 
 ```bash
- # sed ‘1,3e id’ filename.txt
+sed ‘1,3e id’ filename.txt
 ```
 
 This will generate output of `id` command at first to third line of `filename.txt` file output
@@ -590,52 +590,52 @@ This will generate output of `id` command at first to third line of `filename.tx
 ### Substitute
 
 ```bash
-# echo “one five three” | sed ‘s/five/two/’
+echo “one five three” | sed ‘s/five/two/’
 ```
 
 This will search five then replace it with two
 
 ```bash
- # sed ‘s/arnold/ARNOLD/’ filename.txt
+sed ‘s/arnold/ARNOLD/’ filename.txt
 ```
 
 This will search  `arnold` and replace it with `ARNOLD` in the given file
 
 ```bash
-# echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]\+/***/’
+echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]\+/***/’
 ```
 
 This will replace the digits with three stars ( *** ) ; Output will be :
 `Arnold user UID ***`
 
 ```bash
-# echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]/*****/’
+echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]/*****/’
 ```
 
 This will replace only first digit with five stars ( ***** ) ; Output will be :
 `Arnold user UID *****000`
 
 ```bash
-# echo “Arnold user UID 1000” | sed ‘s/[0-9]\+/*****/’
+echo “Arnold user UID 1000” | sed ‘s/[0-9]\+/*****/’
 ```
 
 Using Pattern instead of Character class;Output will be :
 `Arnold user UID *****`
 
 ```bash
-# sed ‘s/[0-9]\+/*****/g’ filename.txt
+sed ‘s/[0-9]\+/*****/g’ filename.txt
 ```
 
 This will replace all the digits of the file with four stars
 
 ```bash
- # sed ‘s/[[:digit:]]\+/***/g’ filename.txt
+sed ‘s/[[:digit:]]\+/***/g’ filename.txt
 ```
 
 This will replace all of the digits of the given file with three stars 
 
 ```bash
- # sed ‘s/arnold/Arnold/ & & & &/’ filename.txt
+sed ‘s/arnold/Arnold/ & & & &/’ filename.txt
 ```
 
 This will repeat `Arnold arnold arnold arnold arnold` when `arnold` is found in the given file ( Depends on the number of & symbol we provided )
@@ -645,11 +645,11 @@ This will repeat `Arnold arnold arnold arnold arnold` when `arnold` is found in 
 ### Multiple sed commands [ -e ]
 
 ```bash
- # sed -ne ‘/arnold/p’ -ne ‘/root/p’ filename.txt
+sed -ne ‘/arnold/p’ -ne ‘/root/p’ filename.txt
 ```
 
 ```bash
- # sed -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
+sed -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
 ```
 
 This command will append `+++++++++++++++++++++` and prepend `---------------------` at the same time when the `arnold` word is found in the given file.
@@ -657,7 +657,7 @@ This command will append `+++++++++++++++++++++` and prepend `------------------
 ### Saving the changes [ -i ]
 
 ```bash
- # sed -i -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
+sed -i -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
 ```
 
 Using -i will save the changes in the file
