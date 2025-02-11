@@ -1,11 +1,11 @@
-### **String Processing in Linux**
+### **STRING PROCESSING IN LINUX**
 
 **Why is string processing used?**
 String processing is commonly used to filter and extract specific parts of output from commands such as `ifconfig`, `ip a`, etc.
 
 ---
 
-### **Displaying File Content**
+### **HEAD**
 
 1. **`head` Command**  
    The `head` command is used to display the first few lines of a file. By default, it shows the first 10 lines.
@@ -21,6 +21,8 @@ String processing is commonly used to filter and extract specific parts of outpu
    head 1.txt messages /var/log/centos.rep   # Displays first 10 lines from all three files
    ```
 
+### **TAIL**   
+
 2. **`tail` Command**  
    The `tail` command is used to display the last few lines of a file. It shows the last 10 lines by default.
    ```bash
@@ -29,8 +31,12 @@ String processing is commonly used to filter and extract specific parts of outpu
    ```
 
 ---
+---
+---
 
-### **Counting Lines, Words, and Characters: `wc` Command**
+
+
+### **WC**
 
 1. **`wc` Command**  
    The `wc` command counts the lines, words, and bytes in a file.
@@ -49,8 +55,10 @@ String processing is commonly used to filter and extract specific parts of outpu
    ```
 
 ---
+---
+---
 
-### **Sorting Data: `sort` Command**
+### **SORT**
 
 1. **Basic Sorting**
    ```bash
@@ -94,8 +102,10 @@ String processing is commonly used to filter and extract specific parts of outpu
    ```
 
 ---
+---
+---
 
-### **Watching File Changes: `watch` Command**
+### **WATCH COMMAND**
 
 - **Monitor the output of a command periodically**
   ```bash
@@ -104,8 +114,10 @@ String processing is commonly used to filter and extract specific parts of outpu
   ```
 
 ---
+---
+---
 
-### **Filtering Text: `grep` Command**
+### **GREP**
 
 1. **Basic Search**
    ```bash
@@ -155,7 +167,7 @@ String processing is commonly used to filter and extract specific parts of outpu
 
 ---
 
-### **Advanced `grep` Usage**
+### **ADVANCED GREP**
 
 1. **Find Single Character After a Word**
    ```bash
@@ -188,8 +200,10 @@ String processing is commonly used to filter and extract specific parts of outpu
    ```
 
 ---
+---
+---
 
-### **Cutting Columns: `cut` Command**
+### **CUT COMMAND**
 
 1. **Extract Columns from CSV File**
    ```bash
@@ -209,8 +223,10 @@ String processing is commonly used to filter and extract specific parts of outpu
    ```
 
 ---
+---
+---
 
-### **Joining Files: `paste` Command**
+### **PASTE**
 
 1. **Combine Files Column-wise**
    ```bash
@@ -224,8 +240,473 @@ String processing is commonly used to filter and extract specific parts of outpu
    ```
 
 ---
+---
+---
 
-#  sed
+### **AWK**
+
+**: An Advanced Text Processing Tool**
+
+AWK is a powerful tool used for processing and analyzing text. It can modify file content, unlike commands such as `cut`, `sort`, `grep`, and `cat`, which are used mainly for text extraction and viewing. AWK allows you to perform operations on file contents based on patterns and conditions.
+
+### Basic Structure of an AWK Command:
+An AWK command typically follows this syntax:
+```
+awk 'pattern {action}' filename
+```
+- **Pattern**: The condition that determines when the action is performed.
+- **Action**: The task that AWK performs if the pattern matches.
+
+For example:
+```
+awk '{print $0}' filename
+```
+This command will print all lines of the file because `$0` refers to the entire line.
+
+### Using a Custom Delimiter:
+AWK allows you to specify a delimiter for field separation in a file. The default delimiter is a space or tab, but you can set a custom one using the `-F` option.
+
+For instance:
+```
+awk -F: '{print $1}' filename
+```
+Here, `-F:` sets the colon `:` as the field separator. `$1` refers to the first field of each line.
+
+### Specifying Multiple Fields:
+To print multiple fields, you can list them individually:
+```
+awk -F: '{print $1, $2, $3}' filename
+```
+You cannot use a range like `$1-$3` directly. Instead, specify each field individually (e.g., `$1, $2, $3`).
+
+### Filtering with AWK:
+AWK also lets you filter content based on patterns. For example, to extract the second field of each line from the `ifconfig` command output:
+```
+ifconfig | awk '{print $2}'
+```
+
+You can also apply conditions to select lines that match a certain pattern. For example, to print the second field of lines containing the string `inet`:
+```
+ifconfig | awk '/inet /{print $2}'
+```
+---
+
+### **AWK with BEGIN and END Blocks**
+
+AWK allows you to add custom text at specific points in the command execution using the `BEGIN` and `END` blocks. These blocks allow you to define actions that happen before processing the data (BEGIN) and after processing is complete (END). These are useful for formatting output or adding headers/footers to the results.
+
+#### Example 1: Printing a Header and Data with BEGIN
+If you want to print custom text before displaying the actual data, you can use the `BEGIN` block:
+```
+command = ifconfig | awk 'BEGIN{print "== IP Address =="} /inet /{print $2}'
+```
+**Output:**
+```
+== IP Address ==
+192.168.1.40
+127.0.0.1
+```
+In this command:
+- The `BEGIN` block prints `"== IP Address =="` before any data is processed.
+- The `/inet /{print $2}` part prints the second field (the IP address) of the lines containing `inet`.
+
+#### Example 2: Adding a Footer with END
+You can also use the `END` block to add custom text after the data processing is done. For example:
+```
+command = ifconfig | awk 'BEGIN{print "== IP Address =="} /inet /{print $2} END{print "====="}'
+```
+**Output:**
+```
+== IP Address ==
+192.168.1.40
+127.0.0.1
+=====
+```
+In this command:
+- The `BEGIN` block prints the header `"== IP Address ==""`.
+- The `/inet /{print $2}` part prints the IP addresses.
+- The `END` block prints `"====="` after the data has been processed.
+
+#### Example 3: Custom Text with `echo` Command
+You can use AWK with the `echo` command to add a custom message at the beginning and end of the output:
+```
+command = echo "one two three four" | awk 'BEGIN {print "=== Start ==="} {print $0} END {print "-- Stop --"}'
+```
+**Output:**
+```
+=== Start ===
+one two three four
+-- Stop --
+```
+In this command:
+- The `BEGIN` block prints `"=== Start ==="`.
+- The `{print $0}` part prints the entire input line (`$0` refers to the whole line).
+- The `END` block prints `"-- Stop --"` after the input has been processed.
+
+
+The `BEGIN` and `END` blocks in AWK are useful for:
+- Printing a header before the main output (`BEGIN` block).
+- Adding a footer or final message after the data processing (`END` block).
+
+  ---
+
+### **DELIMITERS**
+
+In AWK, you can include custom delimiters when printing output. This allows you to control the format and how the fields are separated in the printed result. You can add separators like spaces, commas, slashes, or any other character to customize the output. This is helpful for organizing the printed fields or making the output more readable.
+
+Here are a few examples:
+
+#### Example 1: Using a Dash (" - ") Between Fields
+You can print two fields with a dash between them:
+```
+command → echo "one two three four" | awk 'BEGIN {print "=== start ==="} {print $1, " - ", $2} END {print "-- stop --"}'
+```
+**Output:**
+```
+=== start ===
+one - two
+-- stop --
+```
+- In this example:
+  - The `BEGIN` block prints `"=== start ==="`.
+  - The `{print $1, " - ", $2}` part prints the first and second fields separated by a dash (`-`).
+  - The `END` block prints `"-- stop --"` after the data.
+
+#### Example 2: Using a Slash (" / ") Between Fields
+You can print two fields with a slash between them:
+```
+command → echo "one two three four" | awk 'BEGIN {print "=== start ==="} {print $1, " / ", $2} END {print "-- stop --"}'
+```
+**Output:**
+```
+=== start ===
+one / two
+-- stop --
+```
+- Here, the fields are separated by a slash (`/`).
+
+#### Example 3: Using a Newline (" /n ") Between Fields
+You can add a newline between two fields by using `/n` to break the output into separate lines:
+```
+command → echo "one two three four" | awk 'BEGIN {print "=== start ==="} {print $1, " /n ", $2} END {print "-- stop --"}'
+```
+**Output:**
+```
+=== start ===
+one /n two
+-- stop --
+```
+- In this case, `/n` will not actually produce a new line. If you want a true newline, just use `\n` in the print statement:
+```
+command → echo "one two three four" | awk 'BEGIN {print "=== start ==="} {print $1, "\n", $2} END {print "-- stop --"}'
+```
+**Output:**
+```
+=== start ===
+one 
+two
+-- stop --
+```
+- Here, `\n` correctly creates a new line between the fields.
+
+#### Example 4: Using an Underscore (" _ ") Between Fields
+You can print fields with an underscore between them:
+```
+command → echo "one two three four" | awk 'BEGIN {print "=== start ==="} {print $1, " _ ", $2} END {print "-- stop --"}'
+```
+**Output:**
+```
+=== start ===
+one _ two
+-- stop --
+```
+- In this example, the fields are separated by an underscore (`_`).
+
+
+
+---
+---
+
+### **WORKING with AWK**
+
+AWK is a powerful tool for text processing, allowing you to extract and manipulate specific fields from text files or commands. Below are some useful examples that show how you can work with AWK to process text and fields in different ways.
+
+
+#### 1. **Accessing Specific Fields**
+
+To print specific fields from an input, you can use AWK to reference fields by number.
+
+- **Print the first field:**
+    ```
+    command → echo "armour infosec" | awk '{print $1}'
+    ```
+    **Output:**
+    ```
+    armour
+    ```
+    - This prints the first field, which is "armour".
+
+- **Print the second field:**
+    ```
+    command → echo "armour infosec" | awk '{print $2}'
+    ```
+    **Output:**
+    ```
+    infosec
+    ```
+    - This prints the second field, which is "infosec".
+
+---
+
+#### 2. **Updating Values in Fields**
+
+You can update a field's value before printing it using AWK.
+
+- **Update the first field:**
+    ```
+    command → echo "armour infosec" | awk '{$1="ARMOUR"; print $1}'
+    ```
+    **Output:**
+    ```
+    ARMOUR
+    ```
+    - Here, the first field is updated to "ARMOUR" and printed.
+
+---
+
+
+#### 3. **Matching Specific Values**
+
+You can filter specific values by using conditional statements in AWK.
+
+- **Print the second field where the first field matches "inet" (e.g., from `ifconfig` output):**
+    ```
+    command → ifconfig | awk '$1=="inet" {print $2}'
+    ```
+    **Output:**
+    ```
+    192.168.1.40
+    127.0.0.1
+    ```
+    - This prints the second field (IP addresses) where the first field is "inet".
+
+- **Print lines where the first field does not match "inet":**
+    ```
+    command → ifconfig | awk '$1!="inet" {print $2}'
+    ```
+    **Output:**
+    ```
+    (Lines that don't have "inet")
+    ```
+
+---
+
+
+#### 4. **Using Field Separators**
+
+AWK allows you to specify field separators to process files with different delimiters. For example, you can use a colon (`:`) separator to work with `/etc/passwd`.
+
+- **Print lines where the first field is "root":**
+    ```
+    command → cat /etc/passwd | awk -F: '$1=="root" {print $0}'
+    ```
+    **Output:**
+    ```
+    root:x:0:0:root:/root:/bin/bash
+    ```
+    - This command prints lines where the first field is "root".
+
+- **Print lines where the first field is not "root":**
+    ```
+    command → cat /etc/passwd | awk -F: '$1!="root" {print $0}'
+    ```
+    **Output:**
+    ```
+    (Lines where the first field is not "root")
+    ```
+
+---
+
+
+#### 5. **Working with Numbers and Fields**
+
+AWK can also handle numeric comparisons for fields.
+
+- **Print lines where the third field is "0" (e.g., from `/etc/passwd`):**
+    ```
+    command → cat /etc/passwd | awk -F: '$3==0 {print $0}'
+    ```
+    **Output:**
+    ```
+    root:x:0:0:root:/root:/bin/bash
+    ```
+
+- **Print lines where the third field is greater than or equal to "1000":**
+    ```
+    command → cat /etc/passwd | awk -F: '$3>=1000 {print $0}'
+    ```
+    **Output:**
+    ```
+    (Lines with UID >= 1000)
+    ```
+
+- **Print lines where the third field is greater than "0":**
+    ```
+    command → cat /etc/passwd | awk -F: '$3>0 {print $0}'
+    ```
+    **Output:**
+    ```
+    (Lines with UID > 0)
+    ```
+
+---
+
+
+#### 6. **Using AWK with Files**
+
+AWK can process files line by line and can output data in a specific format using `BEGIN` and `END` blocks.
+
+- **Using `BEGIN` and `END` to print a header and footer with a file:**
+    ```
+    command → vim test.txt
+    BEGIN { print "passwd file" }
+    { print $1, "home at", $6 }
+    END { print "END passwd file" }
+    
+    command → awk -F: -f test.txt /etc/passwd
+    ```
+    **Output:**
+    ```
+    passwd file
+    root home at /root
+    user1 home at /home/user1
+    END passwd file
+    ```
+
+---
+
+
+#### 7. **Arithmetic Operations with AWK**
+
+AWK supports arithmetic operations such as addition, subtraction, multiplication, and division.
+
+- **Print the MAC address from `ifconfig` using AWK (find lines that start with "ether"):**
+    ```
+    command → ifconfig | awk '$1=="ether" {print $2}'
+    ```
+    **Output:**
+    ```
+    (MAC address)
+    ```
+
+---
+
+
+#### 8. **Working with Field Count (`NF`)**
+
+AWK automatically counts the number of fields in each line with the special variable `NF`.
+
+- **Print the number of fields in a line:**
+    ```
+    command → echo "one two three four" | awk '{print NF}'
+    ```
+    **Output:**
+    ```
+    4
+    ```
+    - This prints the number of fields (4 in this case).
+
+- **Print the last field:**
+    ```
+    command → echo "one two three four" | awk '{print $NF}'
+    ```
+    **Output:**
+    ```
+    four
+    ```
+    - `$NF` refers to the last field.
+
+- **Print the second-last field:**
+    ```
+    command → echo "one two three four" | awk '{print $(NF-1)}'
+    ```
+    **Output:**
+    ```
+    three
+    ```
+
+- **Print both the last and second-last fields:**
+    ```
+    command → echo "one two three four" | awk '{print $NF, $(NF-1)}'
+    ```
+    **Output:**
+    ```
+    four three
+    ```
+
+---
+
+
+#### 9. **Working with `/etc/passwd` File Fields**
+
+You can use `NF` to analyze the `/etc/passwd` file or other files.
+
+- **Print the number of fields in each line of `/etc/passwd`:**
+    ```
+    command → cat /etc/passwd | awk '{print NF}'
+    ```
+
+- **Print the last field of each line in `/etc/passwd`:**
+    ```
+    command → cat /etc/passwd | awk '{print $NF}'
+    ```
+
+- **Print both the last and second-last fields in `/etc/passwd`:**
+    ```
+    command → cat /etc/passwd | awk '{print $NF, $(NF-1)}'
+    ```
+
+---
+
+
+### Summary:
+AWK is an extremely flexible tool for text processing. It allows you to:
+- Access specific fields.
+- Update or filter data based on conditions.
+- Use mathematical operations.
+- Process files with specific delimiters.
+- Count fields with `NF` and manipulate data accordingly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+---
+
+---
+---
+
+### **SED**
 
    sed OPTIONS [SCRIPT] [INPUT_FILE]
 
@@ -272,49 +753,49 @@ Command Line operations
 ---
 
 ```bash
- # sed ‘1.2p’ /etc/passwd
+sed ‘1.2p’ /etc/passwd
 ```
 
 This will print line 1 and 2, two times and the rest of the file as same as it is
 
 ```bash
- # sed -n ‘1.2p’ /etc/passwd
+sed -n ‘1.2p’ /etc/passwd
 ```
 
 This command will only print line 1 and 2, the rest of the file will not be printed
 
 ```bash
- # sed -n ‘/^$/p’ /etc/passwd
+sed -n ‘/^$/p’ /etc/passwd
 ```
 
 Print only empty lines
 
 ```bash
- # sed -n ‘/^$/!p’ /etc/passwd
+sed -n ‘/^$/!p’ /etc/passwd
 ```
 
 Do not print empty lines
 
 ```bash
- # sed -n '1,$p' /etc/passwd
+sed -n '1,$p' /etc/passwd
 ```
 
 Print all lines 
 
 ```bash
- # sed -n '$p' /etc/passwd
+sed -n '$p' /etc/passwd
 ```
 
 This will only print last line
 
 ```bash
- # sed -n '5,8!p' /etc/passwd
+sed -n '5,8!p' /etc/passwd
 ```
 
 Do not print lines 5 to 8
 
 ```bash
- # sed '5,$d' /etc/passwd
+sed '5,$d' /etc/passwd
 ```
 
 Do not print lines 5 to last / print lines 1 to 4
@@ -324,13 +805,13 @@ Do not print lines 5 to last / print lines 1 to 4
 ### Pattern Matching / Pattern Searching
 
 ```bash
- # sed -n '/root/p' /etc/passwd
+sed -n '/root/p' /etc/passwd
 ```
 
 Matching `root` in given file
 
 ```bash
- # sed -n '/root/,+3p' /etc/passwd
+sed -n '/root/,+3p' /etc/passwd
 ```
 
 Print lines where `root` is matched and print next 3 lines where `root` is matched 
@@ -340,50 +821,50 @@ Print lines where `root` is matched and print next 3 lines where `root` is match
 ### Find and replace
 
 ```bash
- # sed -n 's/sbin/SBIN' /etc/passwd
+sed -n 's/sbin/SBIN' /etc/passwd
 ```
 
 Searching `sbin` and replacing it with `SBIN`  ( This will only replace first match in a single lines )
 
 ```bash
- # sed -n 's/root/ROOT/gp' /etc/passwd
+sed -n 's/root/ROOT/gp' /etc/passwd
 ```
 
 `g` Means global, every single match of the file will be replaced with the word we are replacing 
 
 ```bash
- # sed -n 's/root/ROOT/1p' /etc/passwd
+sed -n 's/root/ROOT/1p' /etc/passwd
 ```
 
 Match `root` in line in given file and replace only first `root` with`ROOT` 
 
 ```bash
- # sed -n 's/root/ROOT/2p' /etc/passwd
+sed -n 's/root/ROOT/2p' /etc/passwd
 ```
 
 Match `root` in line in given file and replace only second `root` with`ROOT` 
 
 ```bash
- # echo “Welcome To Presidential Suite” | sed ‘s/\(\b[A-Z]\)/\(\1\)/g’
+echo “Welcome To Presidential Suite” | sed ‘s/\(\b[A-Z]\)/\(\1\)/g’
 ```
 
 Output will be :
 `(W)elcome (T)o (P)residential (S)uite`
 
 ```bash
- # sed ‘4 s/sbin/SBIN/’ file_name.txt
+sed ‘4 s/sbin/SBIN/’ file_name.txt
 ```
 
 This will replace `sbin` to `SBIN` in line number `4`
 
 ```bash
- # sed G file_name.txt
+sed G file_name.txt
 ```
 
 Adds an empty line after every line in the file.
 
 ```bash
- # sed 'G;G;G' file_name.txt
+sed 'G;G;G' file_name.txt
 ```
 
 This will add 3 empty lines after every line in the file.
@@ -393,31 +874,31 @@ This will add 3 empty lines after every line in the file.
 ### Append
 
 ```bash
- # sed ‘/arnold/a ARNOLD User’ file_name.txt
+sed ‘/arnold/a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after `arnold` in the given file
 
 ```bash
- # sed ‘2a ARNOLD User’ file_name.txt
+sed ‘2a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after the second line of the given file
 
 ```bash
- # sed ‘5a ARNOLD User’ file_name.txt
+sed ‘5a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after the fifth line of the given file
 
 ```bash
- # sed ‘5!a ARNOLD User’ file_name.txt
+sed ‘5!a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after every line except fifth line of the given file
 
 ```bash
- # sed ‘1,5a ARNOLD User’ file_name.txt
+sed ‘1,5a ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` after every line between 1 to 5th line of the given file 
@@ -427,25 +908,25 @@ This will add `ARNOLD User` after every line between 1 to 5th line of the given 
 ### prepend
 
 ```bash
- # sed ‘1i ARNOLD User’ file_name.txt
+sed ‘1i ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` before the first line of the given file
 
 ```bash
- # sed ‘5!i ARNOLD User’ file_name.txt
+sed ‘5!i ARNOLD User’ file_name.txt
 ```
 
 This will add `ARNOLD User` before every line except fifth line of the given file
 
 ```bash
- # sed ‘1i——————————————————————’ filename.txt
+sed ‘1i--------------------’ filename.txt
 ```
 
 This will make a line after line 1
 
 ```bash
- # sed ‘1,$i——————————————————————’ filename.txt
+sed ‘1,$i--------------------’ filename.txt
 ```
 
 This will make a line after every line
@@ -453,13 +934,13 @@ This will make a line after every line
 ---
 
 ```bash
- # sed ‘/arnold/d’ file_name.txt
+sed ‘/arnold/d’ file_name.txt
 ```
 
 `d` is for `delete` This will not print `arnold` in the file output
 
 ```bash
- # sed ‘/\tarnold/d’ file_name .txt
+sed ‘/\tarnold/d’ file_name .txt
 ```
 
 Do not print `arnold` before which `tab` key is used
@@ -467,49 +948,49 @@ Do not print `arnold` before which `tab` key is used
 ### Using character classes
 
 ```bash
- # sed ‘/[[:space:]]arnold/d’ filename.txt
+sed ‘/[[:space:]]arnold/d’ filename.txt
 ```
 
 This will `NOT` print lines where `arnold` appears after a `ENTER` (at the start of a new line) `SPACE` and `TAB` key.
 
 ```bash
- # sed ‘[0-9]/d’ filename.txt
+sed ‘[0-9]/d’ filename.txt
 ```
 
 Do `NOT` print output line which has given range of numbers in it.
 
 ```bash
- # sed ‘/[[:digit:]]/p’ filename.txt
+sed ‘/[[:digit:]]/p’ filename.txt
 ```
 
 This will only print output which has digits
 
 ```bash
- # sed ‘/[[:digit:]]/d’ filename.txt
+sed ‘/[[:digit:]]/d’ filename.txt
 ```
 
 This will NOT print output which has digits
 
 ```bash
- # sed ‘/[a-zA-Z]/d’ filename.txt
+sed ‘/[a-zA-Z]/d’ filename.txt
 ```
 
 Delete all lines containing alphabets A to Z capital to small 
 
 ```bash
- # sed ‘/[A-Z]/d’ filename.txt
+sed ‘/[A-Z]/d’ filename.txt
 ```
 
 Delete all lines containing alphabets A to Z capital or Uppercase
 
 ```bash
- # sed ‘/\//d’ filename.txt
+sed ‘/\//d’ filename.txt
 ```
 
 Delete all lines containing `Slash (/)`  
 
 ```bash
- # sed ‘/\thr/d’ filename.txt
+sed ‘/\thr/d’ filename.txt
 ```
 
 Delete all lines containing`hr` after `TAB` key
@@ -519,19 +1000,19 @@ Delete all lines containing`hr` after `TAB` key
 ### Change or replace
 
 ```bash
- # sed ‘/arnold/c ARNOLD User’ filename.txt
+sed ‘/arnold/c ARNOLD User’ filename.txt
 ```
 
 This will change or replace `arnold` to `ARNOLD User`
 
 ```bash
- # sed '1c ARNOLD' filename.txt
+sed '1c ARNOLD' filename.txt
 ```
 
 This will change or replace `arnold` to `ARNOLD` Only in line 1  
 
 ```bash
- # sed '1,5c ARNOLD' filename.txt
+sed '1,5c ARNOLD' filename.txt
 ```
 
 This will change or replace `arnold` to `ARNOLD` Only in line range 1 to 5 
@@ -541,7 +1022,7 @@ This will change or replace `arnold` to `ARNOLD` Only in line range 1 to 5
 ### Quit or exit file
 
 ```bash
- # sed ‘/arnold/q’ filename.txt
+sed ‘/arnold/q’ filename.txt
 ```
 
 This will `Quit` the file when `arnold` is found / printed
@@ -553,8 +1034,8 @@ This will `Quit` the file when `arnold` is found / printed
 The status code of a successfully ran command is `0` , To make any status code of a successful command rather than `0` Use command below
 
 ```bash
- # sed ‘/arnold/q2’ filename.txt
- # echo $?
+sed ‘/arnold/q2’ filename.txt
+echo $?
 ```
 
 The output of status code of command will be `2`
@@ -564,25 +1045,25 @@ The output of status code of command will be `2`
 ### Perform the shell command
 
 ```bash
- # sed ‘1e date’ /etc/passwd
+sed ‘1e date’ /etc/passwd
 ```
 
 This will generate output of `date` command at first line of `/etc/passwd` file output
 
 ```bash
- # sed ‘$e date’ /etc/passwd
+sed ‘$e date’ /etc/passwd
 ```
 
 This will generate output of `date` command at last line of `/etc/passwd` file output
 
 ```bash
- # sed ‘1e echo -n "Date: "; date’ filename.txt
+sed ‘1e echo -n "Date: "; date’ filename.txt
 ```
 
 This will `echo` `date` then output of `date` command at first line of `filename.txt` file output
 
 ```bash
- # sed ‘1,3e id’ filename.txt
+sed ‘1,3e id’ filename.txt
 ```
 
 This will generate output of `id` command at first to third line of `filename.txt` file output
@@ -590,52 +1071,52 @@ This will generate output of `id` command at first to third line of `filename.tx
 ### Substitute
 
 ```bash
-# echo “one five three” | sed ‘s/five/two/’
+echo “one five three” | sed ‘s/five/two/’
 ```
 
 This will search five then replace it with two
 
 ```bash
- # sed ‘s/arnold/ARNOLD/’ filename.txt
+sed ‘s/arnold/ARNOLD/’ filename.txt
 ```
 
 This will search  `arnold` and replace it with `ARNOLD` in the given file
 
 ```bash
-# echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]\+/***/’
+echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]\+/***/’
 ```
 
 This will replace the digits with three stars ( *** ) ; Output will be :
 `Arnold user UID ***`
 
 ```bash
-# echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]/*****/’
+echo “Arnold user UID 1000” | sed ‘s/[[:digit:]]/*****/’
 ```
 
 This will replace only first digit with five stars ( ***** ) ; Output will be :
 `Arnold user UID *****000`
 
 ```bash
-# echo “Arnold user UID 1000” | sed ‘s/[0-9]\+/*****/’
+echo “Arnold user UID 1000” | sed ‘s/[0-9]\+/*****/’
 ```
 
 Using Pattern instead of Character class;Output will be :
 `Arnold user UID *****`
 
 ```bash
-# sed ‘s/[0-9]\+/*****/g’ filename.txt
+sed ‘s/[0-9]\+/*****/g’ filename.txt
 ```
 
 This will replace all the digits of the file with four stars
 
 ```bash
- # sed ‘s/[[:digit:]]\+/***/g’ filename.txt
+sed ‘s/[[:digit:]]\+/***/g’ filename.txt
 ```
 
 This will replace all of the digits of the given file with three stars 
 
 ```bash
- # sed ‘s/arnold/Arnold/ & & & &/’ filename.txt
+sed ‘s/arnold/Arnold/ & & & &/’ filename.txt
 ```
 
 This will repeat `Arnold arnold arnold arnold arnold` when `arnold` is found in the given file ( Depends on the number of & symbol we provided )
@@ -645,11 +1126,11 @@ This will repeat `Arnold arnold arnold arnold arnold` when `arnold` is found in 
 ### Multiple sed commands [ -e ]
 
 ```bash
- # sed -ne ‘/arnold/p’ -ne ‘/root/p’ filename.txt
+sed -ne ‘/arnold/p’ -ne ‘/root/p’ filename.txt
 ```
 
 ```bash
- # sed -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
+sed -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
 ```
 
 This command will append `+++++++++++++++++++++` and prepend `---------------------` at the same time when the `arnold` word is found in the given file.
@@ -657,7 +1138,7 @@ This command will append `+++++++++++++++++++++` and prepend `------------------
 ### Saving the changes [ -i ]
 
 ```bash
- # sed -i -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
+sed -i -e ‘/arnold/a "+++++++++++++++++++++" ’ -e ‘/arnold/i "---------------------" ’ filename.txt
 ```
 
 Using -i will save the changes in the file
