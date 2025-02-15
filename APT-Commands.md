@@ -115,10 +115,10 @@ The Advanced Package Tool (APT) is a high-level package management system used i
 11. Download a Package
 
    ```
-   apt download <package-name> 
+   apt download <package-name>
    ```
-   This saves the .deb package file in the current directory for manual installation or offline use.  
-   For example, to download nmap:
+   Saves the .deb package file in the current directory for manual installation or offline use.  
+   Example:
    ```
    apt download nmap
    ```
@@ -128,8 +128,7 @@ The Advanced Package Tool (APT) is a high-level package management system used i
    ```
    apt depends <package-name>
    ```
-   Lists the dependencies required for a package. This helps understand which additional packages need to be installed for proper functionality.
-
+   Lists the dependencies required for a package. This helps understand which additional packages need to be installed for proper functionality.  
    Example:
    ```
    apt depends nmap
@@ -140,8 +139,7 @@ The Advanced Package Tool (APT) is a high-level package management system used i
    ```
    apt rdepends <package-name>
    ```
-   Shows which other packages depend on a specific package. Useful for identifying dependencies before removing a package.
-
+   Shows which other packages depend on a specific package. Useful before removing a package.  
    Example:
    ```
    apt rdepends nmap
@@ -152,8 +150,7 @@ The Advanced Package Tool (APT) is a high-level package management system used i
    ```
    apt showsrc <package-name>
    ```
-   Retrieves source package details (metadata and the upstream source).
-
+   Retrieves source package details (metadata and upstream source).  
    Example:
    ```
    apt showsrc nmap
@@ -164,8 +161,7 @@ The Advanced Package Tool (APT) is a high-level package management system used i
    ```
    apt source <package-name>
    ```
-   Fetches the package source into the current directory for modification or compilation.
-
+   Fetches the package source into the current directory for modification or compilation.  
    Example:
    ```
    apt source nmap
@@ -176,8 +172,7 @@ The Advanced Package Tool (APT) is a high-level package management system used i
    ```
    apt changelog <package-name>
    ```
-   Checks the recent updates and fixes applied to the package.
-
+   Checks the recent updates and fixes applied to the package.  
    Example:
    ```
    apt changelog nmap
@@ -202,6 +197,8 @@ The Advanced Package Tool (APT) is a high-level package management system used i
 
    ```
    rm /var/lib/dpkg/lock
+   ```
+   ```
    rm /var/lib/dpkg/lock-frontend
    ```
 
@@ -210,35 +207,34 @@ The Advanced Package Tool (APT) is a high-level package management system used i
 
 1. Search for a Package
 
-   To search for a package in the available repositories:
+   To search for a package in the available repositories via apt-cache:
    ```
-   apt-Cachd search <package-name>
+   apt-cache search <package-name>
    ```
-   This returns a list of packages related to the given keyword.
+   Returns a list of packages related to the given keyword.
 
 2. Display Package Details
 
    ```
-   show <package-name>
+   apt show <package-name>
    ```
    Shows metadata such as version, description, and dependencies.
 
 3. Check Package Dependencies
 
    ```
-   depends <package-name>
+   apt-cache depends <package-name>
    ```
-   Lists the dependencies of a package.
-
+   Lists the dependencies for a package.  
    To see which packages depend on the given package:
    ```
-   apt-@éOje rdepends <package-name>
+   apt-cache rdepends <package-name>
    ```
 
 4. View Source Package Information
 
    ```
-   showsrc <package-name>
+   apt-cache showsrc <package-name>
    ```
    Useful when working with package source code.
 
@@ -254,7 +250,7 @@ The Advanced Package Tool (APT) is a high-level package management system used i
    ```
    apt-cache policy <package-name>
    ```
-   Shows the installed and available versions of a package, including repository sources.
+   Shows the installed and available versions of the package, including repository sources.
 
 7. Update and Upgrade Packages
 
