@@ -62,8 +62,14 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys KEY_ID
 #### Step 1: Mount the ISO and Copy Files
 ```
 mount -o loop /path/to/debian.iso /mnt
+```
+```
 mkdir /ubuntudvd
+```
+```
 cp -r /mnt/* /ubuntudvd
+```
+```
 umount /mnt
 ```
 - Mounts the ISO to /mnt.  
