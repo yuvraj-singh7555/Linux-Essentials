@@ -1,4 +1,4 @@
-# 🐧 Linux Training Guide
+# 🐧 Linux Essentials
 
 ## 📌 Introduction to Linux
 - 📜 UNIX, Linux, and Open Source
