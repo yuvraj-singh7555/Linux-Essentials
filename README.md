@@ -112,12 +112,7 @@
   - 📜 Listing the Active/Inactive State of Loaded Units
 - 🔄 Starting, Restarting, and Stopping Services
 
-## 🔐 Security, Process Management, and Monitoring Tools
-### 🔒 Securing Shell
-- 🔄 Change Default Port
-- ❌ Prevent Root Access
-- 🔑 Public/Private Keys
-- 📜 Managing IP Allow and Deny
+## 📊 Process Management, and Monitoring Tools
 
 ### 📊 Job Management
 - 🎛️ `jobs`, `ps`, `htop`
