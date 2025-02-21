@@ -111,6 +111,7 @@ Thus, the numeric permission value is **`754`**.
 
 This system of file permissions allows you to manage who can interact with your files and directories and in what way.
 
+
 -Viewing Permissions:
 
    Use the ls -l command to display detailed information about files, including permissions, ownership, and group association.
