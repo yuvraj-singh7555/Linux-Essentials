@@ -73,12 +73,12 @@
 - 🔐 [ACL Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/ACL.md#access-control-list-acl-in-linux)
 
 ## 📦 Package Management
-- 📂 Overview of RPM and SRPM Packages
-- 🏗️ Explanation of Different Architectures
-- 🛠️ Installing Packages Using RPM
+- 📂 [Overview of RPM and SRPM Packages](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/RPM-Commands.md#rpm-commands)
+- 🏗️ [Explanation of Different Architectures](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Package-Management.md#package-management-in-linux)
+- 🛠️ [Installing Packages Using RPM](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/RPM-Commands.md#installing-packages)
 - 🌐 Understanding Repositories
   - 🏪 Types of Repositories
-- 📥 Installing Packages Using `yum`
+- 📥 [Installing Packages Using `yum`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/YUM-Commands-and-Groups.md#installing-and-removing-packages)
 
 ## 💾 File System & Disk Management
 - 💿 Types of Disks
