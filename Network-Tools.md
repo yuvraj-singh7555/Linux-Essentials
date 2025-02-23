@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/6b34a236-c025-49fb-8b94-d25c79204127)![image](https://github.com/user-attachments/assets/321e4d26-5eae-4df0-b999-df5e4b1e6a4e)# Network Diagnostic & Troubleshooting Commands
+# Network Diagnostic & Troubleshooting Commands
 
 This document covers various tools and commands used for network diagnostics and troubleshooting on Linux systems.
 
