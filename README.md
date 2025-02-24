@@ -31,7 +31,7 @@
 - 🎨 [`vi` / `vim`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Text-Editor.md#vim-text-editor)
 
 ## 🔍 String Processing and Finding Files
-### 🛠️ String Processing Commands:
+
 - 🔝 [`head`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/String-Processing.md#head)
 - 🔚 [`tail`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/String-Processing.md#tail)
 - 🔢 [`wc`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/String-Processing.md#wc)
@@ -49,36 +49,36 @@
 - 📌 [`whereis`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Finding-Files.md#3-whereis-command)
 
 ## 👥 Users, Groups, and Permissions
-- 🖥️ Types of Shells
-- 🏢 Users and Groups
-- 📄 `/etc/passwd` File
-- 🔐 `/etc/shadow` File
-- 📂 `/etc/group` File
-- 🔏 `/etc/gshadow` File
+- 🖥️ [Types of Shells](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Linux-Shell-Introduction.md#shells-in-linux)
+- 🏢 [Users and Groups](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/User-and-Group-Management.md#user-management)
+- 📄 [`/etc/passwd` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-1-etcpasswd--user-account-information)
+- 🔐 [`/etc/shadow` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-2-etcshadow--secure-password-storage)
+- 📂 [`/etc/group` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-3-etcgroup--group-information)
+- 🔏 [`/etc/gshadow` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-4-etcgshadow--secure-group-management)
 - ➕ Adding Users
-- 🔄 Modifying User Accounts
-- ❌ Deleting User Accounts
-- 👥 Working with Groups
+- 🔄 [Modifying User Accounts](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/usermod-userdel-commands.md#user-modify-usermod)
+- ❌ [Deleting User Accounts](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/usermod-userdel-commands.md#user-deletion-userdel)
+- 👥 [Working with Groups](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/groupadd-and-groupdel.md#groupadd-and-groupdel-command)
 - ⚙️ Setting User Environments
 - 🛡️ Root Login
-- 🔄 Sharing Superuser Privileges with others (`su` and `sudo` Commands)
-- 🔀 Switching User and Group
-- 🔑 File Permissions
-- 📂 Directory Permissions
-- 🔄 Changing Permissions
-- ⚙️ Setting Default Permissions
-- 🏷️ SUID Bit
-- 🏷️ SGID Bit
-- 📌 Setting the Sticky Bit
-- 🔐 ACL Permissions
+- 🔄 [Sharing Superuser Privileges with others (`su` and `sudo` Commands)](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/SU-SG-In-Linux.md#switching-users-and-groups-in-linux)
+- 🔀 [Configuring sudo command](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Sudo-Command.md#understanding-and-using-the-sudo-command-in-linux)
+- 🔑 [File Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/File-Permission.md#file-permissions-in-linuxunix)
+- 📂 [Directory Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/CHOWN-CHMOD.md#change-permissions-recursively)
+- 🔄 [Changing Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/CHOWN-CHMOD.md#1-changing-ownership-with-chown)
+- ⚙️ [Setting Default Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/U-mask-Permission-Calculation.md#default-permissions)
+- 🏷️ [SUID Bit](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Special-Permissions-in-Linux.md#1-setuid-suid)
+- 🏷️ [SGID Bit](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Special-Permissions-in-Linux.md#2-setgid-sgid)
+- 📌 [Setting the Sticky Bit](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Special-Permissions-in-Linux.md#3-sticky-bit)
+- 🔐 [ACL Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/ACL.md#access-control-list-acl-in-linux)
 
 ## 📦 Package Management
-- 📂 Overview of RPM and SRPM Packages
-- 🏗️ Explanation of Different Architectures
-- 🛠️ Installing Packages Using RPM
+- 📂 [Overview of RPM and SRPM Packages](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/RPM-Commands.md#rpm-commands)
+- 🏗️ [Explanation of Different Architectures](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Package-Management.md#package-management-in-linux)
+- 🛠️ [Installing Packages Using RPM](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/RPM-Commands.md#installing-packages)
 - 🌐 Understanding Repositories
   - 🏪 Types of Repositories
-- 📥 Installing Packages Using `yum`
+- 📥 [Installing Packages Using `yum`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/YUM-Commands-and-Groups.md#installing-and-removing-packages)
 
 ## 💾 File System & Disk Management
 - 💿 Types of Disks
