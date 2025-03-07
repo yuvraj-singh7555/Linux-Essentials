@@ -3,13 +3,13 @@
 ## 📌 Introduction to Linux
 - 📜 [UNIX, Linux, and Open Source](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Introduction-to-Linux.md)
 - 🖥️ [What is Linux?](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Introduction-to-Linux.md#2-linux)
-- 📅 [History and Evolution of Linux]()
-- ⚙️ Understanding the Linux Kernel
-- 🔑 Key Features of Linux
+- 📅 History and Evolution of Linux
+- ⚙️ [Understanding the Linux Kernel](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Understanding-the-Linux-Kernel.md#-what-is-the-linux-kernel)
+- 🔑 [Key Features of Linux](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Key-Features-of-Linux.md#key-features-of-linux)
 - 📦 [Linux Distributions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Linux-Distributions.md)
 - 📂 [Directory Structure of Linux](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Directory-Structure-of-Linux.md#linux-directory-structure)
 - 💾 [Linux Installation](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Centos-9-installation.md#centos-9-installation-gui)
-- 🔐 Login Methods in Linux
+- 🔐 [Login Methods in Linux](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Login-Methods-in-Linux.md#-linux-login-methods)
 - 🔄 [Run Levels in Linux](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Run-level.md#explanation-of-runlevels)
 
 ## 🏗️ Linux Basic Commands
@@ -23,7 +23,7 @@
 - 🗜️ [Compression Tools (`zip`, `gzip`, `bzip`, `tar`, `7zip`)](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Compress-Tool.md#bzip2-commands)
 - 🎁 [Archiving Tools](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Compress-Tool.md#create-a-tar-archive)
 - 🔗 [Symbolic Links](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Wildcards.md#wildcards-in-linux)
-- ⚡ Shortcuts
+- ⚡ [Shortcuts](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Linux-Shortcuts.md#linux-keyboard-shortcuts-cheat-sheet)
 
 ## ✍️ Text Editors
 - 📝 [`cat`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Text-Editor.md#1-cat-command)
@@ -55,12 +55,11 @@
 - 🔐 [`/etc/shadow` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-2-etcshadow--secure-password-storage)
 - 📂 [`/etc/group` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-3-etcgroup--group-information)
 - 🔏 [`/etc/gshadow` File](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/System%20File%20in%20Linux.md#-4-etcgshadow--secure-group-management)
-- ➕ Adding Users
+- ➕ [Adding Users](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/useradd-adduser-Command.md#1-useradd-command)
 - 🔄 [Modifying User Accounts](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/usermod-userdel-commands.md#user-modify-usermod)
 - ❌ [Deleting User Accounts](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/usermod-userdel-commands.md#user-deletion-userdel)
 - 👥 [Working with Groups](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/groupadd-and-groupdel.md#groupadd-and-groupdel-command)
-- ⚙️ Setting User Environments
-- 🛡️ Root Login
+- 🛡️ [Root Login](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Root-Login.md#-how-to-enable-root-login-in-linux)
 - 🔄 [Sharing Superuser Privileges with others (`su` and `sudo` Commands)](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/SU-SG-In-Linux.md#switching-users-and-groups-in-linux)
 - 🔀 [Configuring sudo command](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Sudo-Command.md#understanding-and-using-the-sudo-command-in-linux)
 - 🔑 [File Permissions](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/File-Permission.md#file-permissions-in-linuxunix)
@@ -76,8 +75,8 @@
 - 📂 [Overview of RPM and SRPM Packages](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/RPM-Commands.md#rpm-commands)
 - 🏗️ [Explanation of Different Architectures](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Package-Management.md#package-management-in-linux)
 - 🛠️ [Installing Packages Using RPM](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/RPM-Commands.md#installing-packages)
-- 🌐 Understanding Repositories
-  - 🏪 Types of Repositories
+- 🌐 [Understanding Repositories](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Understanding-Repositories.md#-understanding-repositories-in-linux-)
+  - 🏪 [Types of Repositories](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/Types-of-Repositories.md#-types-of-repositories-in-linux)
 - 📥 [Installing Packages Using `yum`](https://github.com/InfoSecWarrior/Linux-Essentials/blob/main/YUM-Commands-and-Groups.md#installing-and-removing-packages)
 
 ## 💾 File System & Disk Management
